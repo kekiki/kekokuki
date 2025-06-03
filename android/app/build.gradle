@@ -1,0 +1,162 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+    // TODO: 正式包 - 正式包放开
+// id "com.google.gms.google-services"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0.0'
+}
+
+def developKeystoreProperties = new Properties()
+def developKeystorePropertiesFile = rootProject.file('./app/keystore/develop.properties')
+if (developKeystorePropertiesFile.exists()) {
+    developKeystoreProperties.load(new FileInputStream(developKeystorePropertiesFile))
+}
+
+def productionKeystoreProperties = new Properties()
+def productionKeystorePropertiesFile = rootProject.file('./app/keystore/production.properties')
+if (productionKeystorePropertiesFile.exists()) {
+    productionKeystoreProperties.load(new FileInputStream(productionKeystorePropertiesFile))
+}
+
+android {
+    namespace "com.bobichat.manda"
+    compileSdk flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    packagingOptions {
+         // 去掉agora无用的库
+        exclude "**/libagora_drm_loader_extension.so"
+        exclude "**/libagora_udrm3_extension.so"
+        exclude "**/libagora_content_inspect_extensio.so"
+//            exclude "**/libagora_clear_vision_extension.so" // 美颜的插件需要
+        exclude "**/libagora_audio_beauty_extension.so"
+        exclude "**/libagora_ai_noise_suppression_extension.so"
+        exclude "**/libagora_face_detection_extension.so"
+        exclude "**/libagora_screen_capture_extension.so"
+        exclude "**/libagora_video_quality_analyzer_extension.so"
+        exclude "**/libagora_ai_echo_cancellation_extension.so"
+        exclude "**/libagora_video_encoder_extension.so"
+        exclude "**/video_enc.so"
+        exclude "**/libagora_video_decoder_extension.so"
+        exclude "**/video_dec.so"
+        exclude "**/libagora_ai_denoise_extension.so"
+        exclude "**/libagora_dav1d_extension.so"
+        exclude "**/libagora_fd_extension.so"
+        exclude "**/libagora_segmentation_extension.so"
+        exclude "**/libagora_super_resolution_extension.so"
+        exclude "**/libagora_video_process_extension.so"
+        exclude "**/libagora_full_audio_format_extension.so"
+        exclude "**/libagora_ci_extension.so"
+        exclude "**/libagora_spatial_audio_extension.so"
+        exclude "**/libagora_content_inspect_extension.so" // 视频截图上传插件
+    }
+
+    defaultConfig {
+        applicationId "com.example.kekokuki"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+    }
+
+    flavorDimensions "app"
+    productFlavors {
+        develop {
+            dimension "app"
+            // resValue "string", "kekokuki", "kekokuki_debug"
+            applicationId "com.example.kekokuki"
+        }
+        production {
+            dimension "app"
+            applicationId "com.bobichat.manda"
+        }
+    }
+
+    signingConfigs {
+        develop {
+            storeFile file(developKeystoreProperties['storeFile'])
+            storePassword developKeystoreProperties['storePassword']
+            keyAlias developKeystoreProperties['keyAlias']
+            keyPassword developKeystoreProperties['keyPassword']
+        }
+        production {
+            storeFile file(productionKeystoreProperties['storeFile'])
+            storePassword productionKeystoreProperties['storePassword']
+            keyAlias productionKeystoreProperties['keyAlias']
+            keyPassword productionKeystoreProperties['keyPassword']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            productFlavors.production.signingConfig signingConfigs.production
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            productFlavors.develop.signingConfig signingConfigs.develop
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // TODO: 正式包 - 正式包放开
+//    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+//    implementation 'com.android.installreferrer:installreferrer:2.2'
+}
