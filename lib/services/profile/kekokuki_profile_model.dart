@@ -81,7 +81,7 @@ class KekokukiProfileModel extends Object {
   @JsonKey(name: 'portrait', defaultValue: '')
   final String portrait;
 
-  @JsonKey(name: 'propVoList', defaultValue: [])
+  @JsonKey(name: 'propVoList')
   final List<KekokukiProfilePropVoList> propVoList;
 
   @JsonKey(name: 'rechargeFlag', defaultValue: 0)

@@ -1,6 +1,4 @@
 # kekokuki
-Flutter 1v1 母包，开发前请先执行shell目录下的脚本拷贝工程，修改文件名前缀、类名前缀、资源文件hash，
-详见/shell/README.md, 执行完成后再开始您的新包开发, 祝你生活愉快。
 
 ## 开发环境：Flutter & Dart
 Flutter 3.22.3
@@ -9,14 +7,12 @@ Engine • revision 235db911ba
 Tools • Dart 3.4.4 • DevTools 2.34.3
 
 ## main入口配置
-- main_develop.dart为开发环境，支持切换API接口域名
-- main_production.dart为生产环境，仅供打包上架使用，编译命令见文件底部
 ``` iOS:
 {
     "name": "kekokuki",
     "request": "launch",
     "type": "dart",
-    "program": "lib/main_develop.dart",
+    "program": "lib/main.dart",
 }
 ```
 ``` Android:
@@ -25,7 +21,7 @@ Tools • Dart 3.4.4 • DevTools 2.34.3
     "name": "kekokuki",
     "request": "launch",
     "type": "dart",
-    "program": "lib/main_develop.dart",
+    "program": "lib/main.dart",
     "args":[
         "--flavor",
         "develop"

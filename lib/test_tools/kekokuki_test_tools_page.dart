@@ -47,7 +47,7 @@ class KekokukiTestToolsPage extends StatelessWidget {
           trailing: const Icon(Icons.navigate_next_rounded, size: 20),
           onTap: () async {
             final lines = await KekokukiLogUtil.readAsLines();
-            final clear = await Get.to(KekokukiTestLogPage(lines: lines.reversed.toList()));
+            final clear = await Get.to(() => KekokukiTestLogPage(lines: lines.reversed.toList()));
             if (clear == true) KekokukiLogUtil.clear();
           },
         ),

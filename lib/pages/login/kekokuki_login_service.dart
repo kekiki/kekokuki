@@ -11,7 +11,7 @@ import '../../services/preference/kekokuki_app_preference.dart';
 import '../../services/profile/kekokuki_profile_service.dart';
 import '../../services/routes/kekokuki_routes.dart';
 import '../../services/rtm/kekokuki_rtm_service.dart';
-import '../call/kekokuki_call_service.dart';
+import '../call/services/kekokuki_call_service.dart';
 import '../chat/services/kekokuki_chat_service.dart';
 import 'kekokuki_login_info_model.dart';
 import 'kekokuki_login_record_model.dart';

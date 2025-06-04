@@ -19,7 +19,7 @@ class KekokukiChatMessagePage extends GetView<KekokukiChatMessagePageController>
   static Future<T?> show<T>({required int anchorId}) async {
     final tag = '$anchorId';
     return await Get.to<T>(
-      KekokukiChatMessagePage(tag),
+      () => KekokukiChatMessagePage(tag),
       arguments: anchorId,
       binding: BindingsBuilder.put(() => KekokukiChatMessagePageController(), tag: tag),
     );

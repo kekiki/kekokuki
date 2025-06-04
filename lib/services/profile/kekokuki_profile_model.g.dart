@@ -35,7 +35,7 @@ KekokukiProfileModel _$KekokukiProfileModelFromJson(
               ?.map((e) =>
                   KekokukiProfilePropVoList.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          [],
+          const [],
       rechargeFlag: (json['rechargeFlag'] as num?)?.toInt() ?? 0,
       registerReportFlag: (json['registerReportFlag'] as num?)?.toInt() ?? 0,
       registerRewardFlag: (json['registerRewardFlag'] as num?)?.toInt() ?? 0,

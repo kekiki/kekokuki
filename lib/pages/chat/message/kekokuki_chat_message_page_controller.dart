@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -47,7 +49,7 @@ class KekokukiChatMessagePageController extends GetxController with KekokukiChat
 
   @override
   void didChangeMetrics() {
-    if (Get.mediaQuery.viewInsets.bottom > 0) keyboardHeightObs.value = Get.mediaQuery.viewInsets.bottom;
+    keyboardHeightObs.value = max(Get.mediaQuery.viewInsets.bottom, keyboardHeightObs.value);
   }
 
   void onProfileChangedListener(KekokukiProfileModel? profile) {

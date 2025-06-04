@@ -48,7 +48,10 @@ class KekokukiChatService extends GetxService {
       duration: const Duration(seconds: 5),
       backgroundColor: Colors.black12,
       mainButton: TextButton(onPressed: () {}, child: const Text("Reply")),
-      onTap: (snack) => KekokukiChatMessagePage.show(anchorId: message.anchorId),
+      onTap: (snack) {
+        Get.back();
+        KekokukiChatMessagePage.show(anchorId: message.anchorId);
+      },
     );
   }
 

@@ -1,13 +1,16 @@
 import 'package:sprintf/sprintf.dart';
 
 class KekokukiFormatUtil {
-  static String millisecondsToTime(int milliseconds) {
+  static String millisecondsToTime(int milliseconds, {bool showSeconds = false}) {
     if (milliseconds <= 0) {
       return "";
     }
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(milliseconds);
     DateTime now = DateTime.now();
     if (dateTime.year == now.year && dateTime.month == now.month && dateTime.day == now.day) {
+      if (!showSeconds) {
+        return sprintf("%02d:%02d", [dateTime.hour, dateTime.minute]);
+      }
       return sprintf("%02d:%02d:%02d", [dateTime.hour, dateTime.minute, dateTime.second]);
     }
 

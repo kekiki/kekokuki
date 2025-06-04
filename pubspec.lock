@@ -9,14 +9,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "67.0.0"
+  agora_rtc_engine:
+    dependency: "direct main"
+    description:
+      name: agora_rtc_engine
+      sha256: f3b2cf4292692a4de45272adae79554f4942624af5049d222ac0dbe981944070
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "6.5.2"
   agora_rtm:
     dependency: "direct main"
     description:
       name: agora_rtm
-      sha256: "56d802cd6592a163a90c1a4220e361734fa1a45dfe13536f36f4e81e1b7f5a61"
+      sha256: "6c65cf6c9658acc9024322798c546e9dc61c39605b67d0af069793d4ee81d199"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.2.2"
+    version: "1.5.9"
   analyzer:
     dependency: transitive
     description:
