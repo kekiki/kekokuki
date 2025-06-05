@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:kekokuki/services/config/kekokuki_app_config.dart';
 import 'package:logger/logger.dart';
 
-import '../../framework/utils/kekokuki_path_util.dart';
-import '../../framework/utils/kekokuki_stacktrace_util.dart';
+import 'kekokuki_path_util.dart';
+import 'kekokuki_stacktrace_util.dart';
 
 class KekokukiLogUtil {
   static late final Logger _fileLogger;

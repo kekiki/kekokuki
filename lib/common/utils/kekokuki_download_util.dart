@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../services/config/kekokuki_log_util.dart';
+import 'kekokuki_log_util.dart';
 
 class KekokukiDownloadUtil {
   static Future<bool> download({

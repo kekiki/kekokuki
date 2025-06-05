@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import '../../framework/widgets/kekokuki_app_scaffold.dart';
+import '../../common/widgets/kekokuki_app_scaffold.dart';
 import '../chat/conversation/kekokuki_chat_conversation_page.dart';
 import '../explore/kekokuki_explore_page.dart';
 import '../match/kekokuki_match_page.dart';

@@ -7,6 +7,7 @@ import '../../pages/call/ai/kekokuk_aib_anchor_model.dart';
 import '../../pages/call/ai/kekokuki_ai_config_model.dart';
 import '../../pages/chat/message/kekokuk_sensitive_word_model.dart';
 import '../../pages/explore/anchor_detail/kekokuk_anchor_model.dart';
+import '../../pages/explore/anchor_list/kekokuki_anchor_area_model.dart';
 import '../../pages/explore/gift_rank/kekokuki_gift_rank_model.dart';
 import '../../pages/explore/room_list/kekokuki_room_model.dart';
 import '../../pages/login/kekokuki_login_info_model.dart';
@@ -65,11 +66,11 @@ abstract class KekokukiApiClient {
   /// [anchorType] 主播类型 [AnchorTypeFilter]
   /// [resetRepeat] 是否重置重复主播, 0:不重置, 1:重置
   @POST('/user/anchor/getAnchors')
-  Future<KekokukiApiResponse<KekokukiAnchorModel>> fetchAnchorList({
+  Future<KekokukiApiResponse<List<KekokukiAnchorModel>>> fetchAnchorList({
     @Field('countryCode') int? countryCode,
     @Field('areaCode') int? areaCode,
     @Field('anchorType') int? anchorType,
-    @Field('resetRepeat') int resetRepeat = 1,
+    @Field('resetRepeat') int resetRepeat = 0,
   });
 
   @GET('/user/anchor/getMatchLimit')
@@ -83,6 +84,10 @@ abstract class KekokukiApiClient {
 
   /// System API
 
+// 返回当前翻译文档地址，使用需下载
+  @GET('/system/app/getTranslates')
+  Future<KekokukiApiResponse<String>> fetchTranslates();
+
   @GET('/system/app/getConfig')
   Future<KekokukiApiResponse<KekokukiConfigModel>> fetchConfig();
 
@@ -94,6 +99,9 @@ abstract class KekokukiApiClient {
 
   @GET('/system/sensitive/getSensitiveWords')
   Future<KekokukiApiResponse<List<KekokukSensitiveWordModel>>> fetchSensitiveWordList();
+
+  @GET('/system/country/getAreas')
+  Future<KekokukiApiResponse<List<KekokukiAnchorAreaModel>>> fetchAnchorAreaList();
 
   /// Product API
 

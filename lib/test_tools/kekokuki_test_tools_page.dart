@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kekokuki/pages/login/kekokuki_login_service.dart';
-import 'package:kekokuki/services/config/kekokuki_log_util.dart';
+import 'package:kekokuki/common/utils/kekokuki_log_util.dart';
 import 'package:kekokuki/services/preference/kekokuki_app_preference.dart';
 
-import '../framework/widgets/kekokuki_app_bar.dart';
-import '../framework/widgets/kekokuki_app_scaffold.dart';
+import '../common/widgets/kekokuki_app_bar.dart';
+import '../common/widgets/kekokuki_app_scaffold.dart';
 import '../services/styles/kekokuki_styles.dart';
 import 'kekokuki_test_log_page.dart';
 

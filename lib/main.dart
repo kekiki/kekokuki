@@ -3,10 +3,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 
-import 'framework/behavior/kekokuki_over_scroll_behavior.dart';
-import 'services/config/kekokuki_log_util.dart';
-import 'framework/utils/kekokuki_keyboard_util.dart';
-import 'framework/utils/kekokuki_loading_util.dart';
+import 'common/behavior/kekokuki_over_scroll_behavior.dart';
+import 'common/utils/kekokuki_log_util.dart';
+import 'common/utils/kekokuki_keyboard_util.dart';
+import 'common/utils/kekokuki_loading_util.dart';
 import 'services/config/kekokuki_app_config.dart';
 import 'services/i18n/kekokuki_local_translations.dart';
 import 'services/routes/kekokuki_router_observer.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kekokuki/services/styles/kekokuki_colors.dart';
-import '../../framework/adapts/kekokuki_screen_adapt.dart';
+import '../../common/adapts/kekokuki_screen_adapt.dart';
 
 abstract class KekokukiStyles {
   /// font style

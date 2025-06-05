@@ -25,6 +25,10 @@ KekokukiProfileModel _$KekokukiProfileModelFromJson(
       hasSplitOrder: (json['hasSplitOrder'] as num?)?.toInt() ?? 0,
       isAdult: (json['isAdult'] as num?)?.toInt() ?? 0,
       isOnline: (json['isOnline'] as num?)?.toInt() ?? 0,
+      levelModel: json['levelConfig'] == null
+          ? null
+          : KekokukProfileLevelModel.fromJson(
+              json['levelConfig'] as Map<String, dynamic>),
       likeFlag: json['likeFlag'] as String? ?? '',
       likeMeCount: json['likeMeCount'] as String? ?? '',
       multiUser: (json['multiUser'] as num?)?.toInt() ?? 0,
@@ -33,7 +37,7 @@ KekokukiProfileModel _$KekokukiProfileModelFromJson(
       portrait: json['portrait'] as String? ?? '',
       propVoList: (json['propVoList'] as List<dynamic>?)
               ?.map((e) =>
-                  KekokukiProfilePropVoList.fromJson(e as Map<String, dynamic>))
+                  KekokukiProfilePropModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       rechargeFlag: (json['rechargeFlag'] as num?)?.toInt() ?? 0,
@@ -79,6 +83,7 @@ Map<String, dynamic> _$KekokukiProfileModelToJson(
       'hasSplitOrder': instance.hasSplitOrder,
       'isAdult': instance.isAdult,
       'isOnline': instance.isOnline,
+      'levelConfig': instance.levelModel?.toJson(),
       'likeFlag': instance.likeFlag,
       'likeMeCount': instance.likeMeCount,
       'multiUser': instance.multiUser,
@@ -110,9 +115,31 @@ Map<String, dynamic> _$KekokukiProfileModelToJson(
       'vipSignFlag': instance.vipSignFlag,
     };
 
-KekokukiProfilePropVoList _$KekokukiProfilePropVoListFromJson(
+KekokukProfileLevelModel _$KekokukProfileLevelModelFromJson(
         Map<String, dynamic> json) =>
-    KekokukiProfilePropVoList(
+    KekokukProfileLevelModel(
+      json['avatarFrame'] as String?,
+      json['begin'] as num?,
+      json['end'] as num?,
+      json['icon'] as String?,
+      json['level'] as num?,
+      json['userIcon'] as String?,
+    );
+
+Map<String, dynamic> _$KekokukProfileLevelModelToJson(
+        KekokukProfileLevelModel instance) =>
+    <String, dynamic>{
+      'avatarFrame': instance.avatarFrame,
+      'begin': instance.begin,
+      'end': instance.end,
+      'icon': instance.icon,
+      'level': instance.level,
+      'userIcon': instance.userIcon,
+    };
+
+KekokukiProfilePropModel _$KekokukiProfilePropModelFromJson(
+        Map<String, dynamic> json) =>
+    KekokukiProfilePropModel(
       animEffectUrl: json['animEffectUrl'] as String? ?? '',
       icon: json['icon'] as String? ?? '',
       name: json['name'] as String? ?? '',
@@ -121,8 +148,8 @@ KekokukiProfilePropVoList _$KekokukiProfilePropVoListFromJson(
       propValue: (json['propValue'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$KekokukiProfilePropVoListToJson(
-        KekokukiProfilePropVoList instance) =>
+Map<String, dynamic> _$KekokukiProfilePropModelToJson(
+        KekokukiProfilePropModel instance) =>
     <String, dynamic>{
       'animEffectUrl': instance.animEffectUrl,
       'icon': instance.icon,

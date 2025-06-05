@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../services/preference/kekokuki_app_preference.dart';
 import '../../services/config/kekokuki_app_config.dart';
-import '../../framework/utils/kekokuki_loading_util.dart';
+import '../../common/utils/kekokuki_loading_util.dart';
 import '../widgets/dialogs/kekokuki_confirm_dialog.dart';
 import '../widgets/dialogs/kekokuki_dialog_util.dart';
 import 'kekokuki_login_account_dialog.dart';

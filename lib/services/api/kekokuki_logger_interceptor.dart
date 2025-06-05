@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:dio/dio.dart';
 
-import '../../framework/logger/kekokuki_dio_logger.dart';
+import '../../common/logger/kekokuki_dio_logger.dart';
 
 /// See https://github.com/Milad-Akarie/pretty_dio_logger/blob/master/lib/pretty_dio_logger.dart
 class KekokukiLoggerInterceptor extends Interceptor {

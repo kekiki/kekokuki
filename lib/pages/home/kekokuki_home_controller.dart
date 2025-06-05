@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:get/get.dart';
-import 'package:kekokuki/services/config/kekokuki_log_util.dart';
+import 'package:kekokuki/common/utils/kekokuki_log_util.dart';
 
 import 'package:kekokuki/pages/widgets/dialogs/kekokuki_confirm_dialog.dart';
 import 'package:kekokuki/pages/widgets/dialogs/kekokuki_dialog_util.dart';

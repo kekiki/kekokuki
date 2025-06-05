@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kekokuki/framework/adapts/kekokuki_screen_adapt.dart';
+import 'package:kekokuki/common/adapts/kekokuki_screen_adapt.dart';
 import 'package:kekokuki/services/styles/kekokuki_styles.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../../../framework/widgets/kekokuki_button_widget.dart';
+import '../../../../common/widgets/kekokuki_button_widget.dart';
 import '../../../../services/styles/kekokuki_colors.dart';
 import 'kekokuki_permission_controller.dart';
 import 'widgets/kekokuki_item_permission.dart';

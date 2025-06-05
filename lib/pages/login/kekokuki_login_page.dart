@@ -1,13 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kekokuki/framework/adapts/kekokuki_screen_adapt.dart';
-import 'package:kekokuki/framework/widgets/kekokuki_app_bar.dart';
+import 'package:kekokuki/common/adapts/kekokuki_screen_adapt.dart';
+import 'package:kekokuki/common/widgets/kekokuki_app_bar.dart';
 import 'package:kekokuki/generated/assets.dart';
 import 'package:kekokuki/services/styles/kekokuki_colors.dart';
 
-import '../../framework/widgets/kekokuki_app_scaffold.dart';
-import '../../framework/widgets/kekokuki_shake_widget.dart';
+import '../../common/widgets/kekokuki_app_scaffold.dart';
+import '../../common/widgets/kekokuki_shake_widget.dart';
 import '../../services/config/kekokuki_app_config.dart';
 import '../../test_tools/kekokuki_test_tools_page.dart';
 import 'kekokuki_login_controller.dart';

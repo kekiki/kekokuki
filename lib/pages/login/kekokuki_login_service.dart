@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kekokuki/services/api/kekokuki_api_response_ext.dart';
 
-import '../../framework/extensions/kekokuki_string_ext.dart';
-import '../../services/config/kekokuki_log_util.dart';
-import '../../framework/utils/kekokuki_loading_util.dart';
+import '../../common/extensions/kekokuki_string_ext.dart';
+import '../../common/utils/kekokuki_log_util.dart';
+import '../../common/utils/kekokuki_loading_util.dart';
 import '../../services/config/kekokuki_config_service.dart';
 import '../../services/preference/kekokuki_app_preference.dart';
 import '../../services/profile/kekokuki_profile_service.dart';

@@ -1,6 +1,6 @@
 import 'package:floor/floor.dart';
 import 'package:get/get.dart';
-import 'package:kekokuki/services/config/kekokuki_log_util.dart';
+import 'package:kekokuki/common/utils/kekokuki_log_util.dart';
 // import 'package:sqflite/sqflite.dart' as sqflite;
 
 import 'kekokuki_database.dart';

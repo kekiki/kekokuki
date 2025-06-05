@@ -4,7 +4,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:get/instance_manager.dart';
 
-import '../config/kekokuki_log_util.dart';
+import '../../common/utils/kekokuki_log_util.dart';
 import '../config/kekokuki_app_config.dart';
 import '../../pages/login/kekokuki_login_service.dart';
 import '../routes/kekokuki_routes.dart';

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:floor/floor.dart';
 import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
-import '../../../framework/utils/kekokuki_format_util.dart';
+import '../../../common/utils/kekokuki_format_util.dart';
 
 part 'kekokuki_chat_message_model.g.dart';
 

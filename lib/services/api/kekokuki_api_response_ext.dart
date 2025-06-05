@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../config/kekokuki_log_util.dart';
+import '../../common/utils/kekokuki_log_util.dart';
 import 'kekokuki_api_response.dart';
 
 extension KekokukiFutureExt<T> on Future<KekokukiApiResponse<T>> {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kekokuki/services/config/kekokuki_log_util.dart';
+import 'package:kekokuki/common/utils/kekokuki_log_util.dart';
 
 class KekokukiKeepAliveWidget extends StatefulWidget {
   final Widget child;

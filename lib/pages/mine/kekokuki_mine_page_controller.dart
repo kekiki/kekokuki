@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:kekokuki/services/config/kekokuki_log_util.dart';
+import 'package:kekokuki/common/utils/kekokuki_log_util.dart';
 
 import '../../services/profile/kekokuki_profile_mixin.dart';
 import '../../services/profile/kekokuki_profile_model.dart';

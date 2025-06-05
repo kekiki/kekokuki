@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kekokuki/framework/adapts/kekokuki_screen_adapt.dart';
+import 'package:kekokuki/common/adapts/kekokuki_screen_adapt.dart';
 
 import '../../../generated/assets.dart';
 import '../../../services/preference/kekokuki_app_preference.dart';

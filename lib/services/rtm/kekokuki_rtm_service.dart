@@ -238,7 +238,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:agora_rtm/agora_rtm.dart';
 import 'package:kekokuki/pages/call/services/kekokuki_call_model.dart';
-import 'package:kekokuki/services/config/kekokuki_log_util.dart';
+import 'package:kekokuki/common/utils/kekokuki_log_util.dart';
 import 'package:kekokuki/services/api/kekokuki_api_client.dart';
 import 'package:kekokuki/services/api/kekokuki_api_response_ext.dart';
 import 'package:kekokuki/services/config/kekokuki_config_service.dart';

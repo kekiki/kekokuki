@@ -94,6 +94,9 @@ dependencies:
   # agora_rtm: ^2.2.2
   agora_rtm: 1.5.9
   agora_rtc_engine: ^6.5.2
+
+  # paging
+  infinite_scroll_pagination: ^5.0.0
   
   # data statistics
   # advertising_id: ^2.7.1

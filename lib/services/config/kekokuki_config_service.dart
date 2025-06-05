@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'kekokuki_log_util.dart';
+import '../../common/utils/kekokuki_log_util.dart';
 import '../api/kekokuki_api_client.dart';
 import './../api/kekokuki_api_response_ext.dart';
 import '../preference/kekokuki_app_preference.dart';

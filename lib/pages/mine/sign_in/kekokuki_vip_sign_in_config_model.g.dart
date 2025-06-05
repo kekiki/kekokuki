@@ -26,9 +26,9 @@ Map<String, dynamic> _$KekokukiVipSignInConfigModelToJson(
 KekokukiVipSignInConfigModelConfigs
     _$KekokukiVipSignInConfigModelConfigsFromJson(Map<String, dynamic> json) =>
         KekokukiVipSignInConfigModelConfigs(
-          json['configType'],
-          json['id'],
-          json['num'],
+          (json['configType'] as num).toInt(),
+          (json['id'] as num).toInt(),
+          (json['num'] as num).toInt(),
         );
 
 Map<String, dynamic> _$KekokukiVipSignInConfigModelConfigsToJson(

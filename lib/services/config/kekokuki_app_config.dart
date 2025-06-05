@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'kekokuki_log_util.dart';
+import '../../common/utils/kekokuki_log_util.dart';
 import '../database/kekokuki_database_service.dart';
 import '../preference/kekokuki_app_preference.dart';
-import '../../framework/utils/kekokuki_path_util.dart';
+import '../../common/utils/kekokuki_path_util.dart';
 import '../api/kekokuki_api_service.dart';
 import '../http_overrides/kekokuki_global_http_overrides.dart';
 import '../../pages/login/kekokuki_login_service.dart';

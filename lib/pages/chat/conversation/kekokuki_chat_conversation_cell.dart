@@ -2,10 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
-import 'package:kekokuki/framework/adapts/kekokuki_screen_adapt.dart';
+import 'package:kekokuki/common/adapts/kekokuki_screen_adapt.dart';
 
-import '../../../framework/utils/kekokuki_format_util.dart';
-import '../../../framework/widgets/kekokuki_round_image_widget.dart';
+import '../../../common/utils/kekokuki_format_util.dart';
+import '../../../common/widgets/kekokuki_round_image_widget.dart';
 import '../../../generated/assets.dart';
 import '../../../services/styles/kekokuki_colors.dart';
 import '../../../services/styles/kekokuki_styles.dart';

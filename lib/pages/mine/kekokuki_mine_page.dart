@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kekokuki/test_tools/kekokuki_test_tools_page.dart';
 
-import '../../framework/widgets/kekokuki_app_bar.dart';
-import '../../framework/widgets/kekokuki_app_scaffold.dart';
+import '../../common/widgets/kekokuki_app_bar.dart';
+import '../../common/widgets/kekokuki_app_scaffold.dart';
 import '../../services/config/kekokuki_app_config.dart';
 import '../../services/styles/kekokuki_styles.dart';
 import 'kekokuki_mine_page_controller.dart';

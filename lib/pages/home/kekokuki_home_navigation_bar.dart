@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:kekokuki/generated/assets.dart';
 import 'package:kekokuki/services/styles/kekokuki_colors.dart';
 
-import '../../framework/adapts/kekokuki_screen_adapt.dart';
+import '../../common/adapts/kekokuki_screen_adapt.dart';
 import '../../services/styles/kekokuki_styles.dart';
 import 'kekokuki_home_state.dart';
 
@@ -23,7 +23,7 @@ class HomeNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 50.pt,
+      height: kBottomNavigationBarHeight,
       color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

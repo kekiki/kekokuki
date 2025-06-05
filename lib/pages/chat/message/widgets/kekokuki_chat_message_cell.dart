@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kekokuki/framework/adapts/kekokuki_screen_adapt.dart';
+import 'package:kekokuki/common/adapts/kekokuki_screen_adapt.dart';
 import 'package:kekokuki/generated/assets.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../framework/widgets/kekokuki_round_image_widget.dart';
+import '../../../../common/widgets/kekokuki_round_image_widget.dart';
 import '../../../../services/styles/kekokuki_colors.dart';
 import '../../../../services/styles/kekokuki_styles.dart';
 import '../kekokuki_chat_message_model.dart';

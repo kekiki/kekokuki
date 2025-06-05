@@ -1,10 +1,10 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kekokuki/framework/adapts/kekokuki_screen_adapt.dart';
+import 'package:kekokuki/common/adapts/kekokuki_screen_adapt.dart';
 
-import '../../../framework/widgets/kekokuki_app_bar.dart';
-import '../../../framework/widgets/kekokuki_app_scaffold.dart';
+import '../../../common/widgets/kekokuki_app_bar.dart';
+import '../../../common/widgets/kekokuki_app_scaffold.dart';
 import '../../../services/styles/kekokuki_colors.dart';
 import '../../../services/styles/kekokuki_styles.dart';
 import '../../widgets/kekokuki_refresh_header.dart';

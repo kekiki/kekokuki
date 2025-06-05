@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kekokuki/framework/adapts/kekokuki_screen_adapt.dart';
+import 'package:kekokuki/common/adapts/kekokuki_screen_adapt.dart';
 import 'package:kekokuki/pages/chat/message/kekokuki_chat_message_page.dart';
 
-import '../../../framework/widgets/kekokuki_round_image_widget.dart';
+import '../../../common/widgets/kekokuki_round_image_widget.dart';
 import '../../../generated/assets.dart';
 import '../../../services/database/kekokuki_database.dart';
 import '../conversation/kekokuki_chat_conversation_model.dart';
@@ -47,7 +47,13 @@ class KekokukiChatService extends GetxService {
       ),
       duration: const Duration(seconds: 5),
       backgroundColor: Colors.black12,
-      mainButton: TextButton(onPressed: () {}, child: const Text("Reply")),
+      mainButton: TextButton(
+        onPressed: () {
+          Get.back();
+          KekokukiChatMessagePage.show(anchorId: message.anchorId);
+        },
+        child: const Text("Reply"),
+      ),
       onTap: (snack) {
         Get.back();
         KekokukiChatMessagePage.show(anchorId: message.anchorId);

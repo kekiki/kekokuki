@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../config/kekokuki_log_util.dart';
+import '../../common/utils/kekokuki_log_util.dart';
 import 'kekokuki_router_mixin.dart';
 
 class KekokukiRouterObserver extends NavigatorObserver {

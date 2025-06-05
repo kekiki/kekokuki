@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../framework/widgets/kekokuki_app_bar.dart';
-import '../../../framework/widgets/kekokuki_app_scaffold.dart';
+import '../../../common/widgets/kekokuki_app_bar.dart';
+import '../../../common/widgets/kekokuki_app_scaffold.dart';
 import '../../../generated/assets.dart';
 import '../../../services/styles/kekokuki_styles.dart';
 import 'kekokuki_chat_message_page_controller.dart';

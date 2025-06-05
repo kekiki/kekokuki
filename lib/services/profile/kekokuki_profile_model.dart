@@ -60,8 +60,8 @@ class KekokukiProfileModel extends Object {
   @JsonKey(name: 'isOnline', defaultValue: 0)
   final int isOnline;
 
-  // @JsonKey(name: 'levelConfig', defaultValue: '')
-  // final String levelConfig;
+  @JsonKey(name: 'levelConfig')
+  final KekokukProfileLevelModel? levelModel;
 
   @JsonKey(name: 'likeFlag', defaultValue: '')
   final String likeFlag;
@@ -82,7 +82,7 @@ class KekokukiProfileModel extends Object {
   final String portrait;
 
   @JsonKey(name: 'propVoList')
-  final List<KekokukiProfilePropVoList> propVoList;
+  final List<KekokukiProfilePropModel> propVoList;
 
   @JsonKey(name: 'rechargeFlag', defaultValue: 0)
   final int rechargeFlag;
@@ -167,7 +167,7 @@ class KekokukiProfileModel extends Object {
     this.hasSplitOrder = 0,
     this.isAdult = 0,
     this.isOnline = 0,
-    // this.levelConfig = '',
+    this.levelModel,
     this.likeFlag = '',
     this.likeMeCount = '',
     this.multiUser = 0,
@@ -205,7 +205,41 @@ class KekokukiProfileModel extends Object {
 }
 
 @JsonSerializable()
-class KekokukiProfilePropVoList extends Object {
+class KekokukProfileLevelModel extends Object {
+  @JsonKey(name: 'avatarFrame')
+  String? avatarFrame;
+
+  @JsonKey(name: 'begin')
+  num? begin;
+
+  @JsonKey(name: 'end')
+  num? end;
+
+  @JsonKey(name: 'icon')
+  String? icon;
+
+  @JsonKey(name: 'level')
+  num? level;
+
+  @JsonKey(name: 'userIcon')
+  String? userIcon;
+
+  KekokukProfileLevelModel(
+    this.avatarFrame,
+    this.begin,
+    this.end,
+    this.icon,
+    this.level,
+    this.userIcon,
+  );
+
+  factory KekokukProfileLevelModel.fromJson(Map<String, dynamic> srcJson) => _$KekokukProfileLevelModelFromJson(srcJson);
+
+  Map<String, dynamic> toJson() => _$KekokukProfileLevelModelToJson(this);
+}
+
+@JsonSerializable()
+class KekokukiProfilePropModel extends Object {
   @JsonKey(name: 'animEffectUrl', defaultValue: '')
   final String animEffectUrl;
 
@@ -224,7 +258,7 @@ class KekokukiProfilePropVoList extends Object {
   @JsonKey(name: 'propValue', defaultValue: 0)
   final int propValue;
 
-  const KekokukiProfilePropVoList({
+  const KekokukiProfilePropModel({
     this.animEffectUrl = '',
     this.icon = '',
     this.name = '',
@@ -233,7 +267,7 @@ class KekokukiProfilePropVoList extends Object {
     this.propValue = 0,
   });
 
-  factory KekokukiProfilePropVoList.fromJson(Map<String, dynamic> srcJson) => _$KekokukiProfilePropVoListFromJson(srcJson);
+  factory KekokukiProfilePropModel.fromJson(Map<String, dynamic> srcJson) => _$KekokukiProfilePropModelFromJson(srcJson);
 
-  Map<String, dynamic> toJson() => _$KekokukiProfilePropVoListToJson(this);
+  Map<String, dynamic> toJson() => _$KekokukiProfilePropModelToJson(this);
 }
