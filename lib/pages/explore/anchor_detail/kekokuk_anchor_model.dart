@@ -6,7 +6,14 @@
 //  Copyright © 2025年 JSONConverter. All rights reserved.
 //
 
+import 'package:floor/floor.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'kekokuki_album_list_converter.dart';
+import 'kekokuki_gift_list_converter.dart';
+import 'kekokuki_level_model_converter.dart';
+import 'kekokuki_moment_list_converter.dart';
+import 'kekokuki_tag_list_converter.dart';
 
 part 'kekokuk_anchor_model.g.dart';
 
@@ -64,149 +71,235 @@ enum KekokukiAuthType {
 }
 
 @JsonSerializable(explicitToJson: true)
+@Entity(tableName: KekokukiAnchorModel.tableName)
+@TypeConverters([
+  KekokukiAlbumListConverter,
+  KekokukiMomentListConverter,
+  KekokukiTagListConverter,
+  KekokukiGiftListConverter,
+  KekokukiLevelModelConverter,
+])
 class KekokukiAnchorModel extends Object {
-  @JsonKey(name: 'albumUrlList', defaultValue: [])
+  static const String tableName = 'database_table_anchor_info';
+
+  @JsonKey(name: 'albumUrlList')
   final List<KekokukAnchorAlbumModel> albumUrlList;
 
-  @JsonKey(name: 'birthday', defaultValue: 0)
+  @JsonKey(name: 'birthday')
   final int birthday;
 
-  @JsonKey(name: 'callPrice', defaultValue: 0)
+  @JsonKey(name: 'callPrice')
   final int callPrice;
 
-  @JsonKey(name: 'countryCode', defaultValue: 0)
+  @JsonKey(name: 'countryCode')
   final int countryCode;
 
-  @JsonKey(name: 'countryPath', defaultValue: '')
+  @JsonKey(name: 'countryPath')
   final String countryPath;
 
-  @JsonKey(name: 'countryTitle', defaultValue: '')
+  @JsonKey(name: 'countryTitle')
   final String countryTitle;
 
-  @JsonKey(name: 'faceFlag', defaultValue: false)
+  @JsonKey(name: 'faceFlag')
   final bool faceFlag;
 
-  @JsonKey(name: 'followCount', defaultValue: 0)
+  @JsonKey(name: 'followCount')
   final int followCount;
 
-  @JsonKey(name: 'followedCount', defaultValue: 0)
+  @JsonKey(name: 'followedCount')
   final int followedCount;
 
-  @JsonKey(name: 'followFlag', defaultValue: KekokukiFollowStatus.unFollow)
+  @JsonKey(name: 'followFlag')
   final KekokukiFollowStatus followStatus;
 
-  @JsonKey(name: 'isOnline', defaultValue: KekokukOnlineStatus.offline)
+  @JsonKey(name: 'isOnline')
   final KekokukOnlineStatus onlineStatus;
 
-  @JsonKey(name: 'language', defaultValue: 'en')
+  @JsonKey(name: 'language')
   final String language;
 
-  @JsonKey(name: 'languageName', defaultValue: 'English')
+  @JsonKey(name: 'languageName')
   final String languageName;
 
   @JsonKey(name: 'levelConfig')
-  final KekokukAnchorLevelModel? levelModel;
+  final KekokukAnchorLevelModel levelModel;
 
-  @JsonKey(name: 'likeFlag', defaultValue: 1)
+// 是否已点赞, 1未点 2已点
+  @JsonKey(name: 'likeFlag')
   final int likeFlag;
 
-  @JsonKey(name: 'likeMeCount', defaultValue: 0)
+  @JsonKey(name: 'likeMeCount')
   final int likeMeCount;
 
-  @JsonKey(name: 'manyLanguage', defaultValue: '')
+  @JsonKey(name: 'manyLanguage')
   final String manyLanguage;
 
-  @JsonKey(name: 'manyLanguageName', defaultValue: '')
+  @JsonKey(name: 'manyLanguageName')
   final String manyLanguageName;
 
-  @JsonKey(name: 'moments', defaultValue: [])
+  @JsonKey(name: 'moments')
   final List<KekokukAnchorMomentModel> moments;
 
-  @JsonKey(name: 'nickname', defaultValue: '')
+  @JsonKey(name: 'nickname')
   final String nickname;
 
-  @JsonKey(name: 'onlineBegin', defaultValue: '')
+  @JsonKey(name: 'onlineBegin')
   final String onlineBegin;
 
-  @JsonKey(name: 'onlineEnd', defaultValue: '')
+  @JsonKey(name: 'onlineEnd')
   final String onlineEnd;
 
-  @JsonKey(name: 'portrait', defaultValue: '')
+  @JsonKey(name: 'portrait')
   final String portrait;
 
   // true表示不需要花钱,已免费聊天,false表示需要花钱
-  @JsonKey(name: 'sendMsgFlag', defaultValue: false)
+  @JsonKey(name: 'sendMsgFlag')
   final bool sendMsgFlag;
 
-  @JsonKey(name: 'sendMsgPrice', defaultValue: 0)
+  @JsonKey(name: 'sendMsgPrice')
   final int sendMsgPrice;
 
-  @JsonKey(name: 'sex', defaultValue: KekokukSex.female)
+  @JsonKey(name: 'sex')
   final KekokukSex sex;
 
-  @JsonKey(name: 'signature', defaultValue: '')
+  @JsonKey(name: 'signature')
   final String signature;
 
 // 在设置了备注的情况下用来获取用户的原始昵称
-  @JsonKey(name: 'srcNickname', defaultValue: '')
+  @JsonKey(name: 'srcNickname')
   final String srcNickname;
 
-  @JsonKey(name: 'tagList', defaultValue: [])
+  @JsonKey(name: 'tagList')
   final List<String> tagList;
 
-  @JsonKey(name: 'userAuth', defaultValue: KekokukiAuthType.authedAnchor)
+  @JsonKey(name: 'userAuth')
   final KekokukiAuthType authType;
 
-  @JsonKey(name: 'userId', defaultValue: 0)
+  @primaryKey
+  @JsonKey(name: 'userId')
   final int id;
 
 // 登录的账户名
-  @JsonKey(name: 'username', defaultValue: '')
+  @JsonKey(name: 'username')
   final String username;
 
 // 用户状态 -1 注销  1 正常
-  @JsonKey(name: 'userStatus', defaultValue: 1)
+  @JsonKey(name: 'userStatus')
   final int userStatus;
 
-  @JsonKey(name: 'wallVoList', defaultValue: [])
+  @JsonKey(name: 'wallVoList')
   final List<KekokukAnchorGiftModel> wallVoList;
 
-  KekokukiAnchorModel(
-    this.albumUrlList,
-    this.birthday,
-    this.callPrice,
-    this.countryCode,
-    this.countryPath,
-    this.countryTitle,
-    this.faceFlag,
-    this.followCount,
-    this.followedCount,
-    this.followStatus,
-    this.onlineStatus,
-    this.language,
-    this.languageName,
-    this.levelModel,
-    this.likeFlag,
-    this.likeMeCount,
-    this.manyLanguage,
-    this.manyLanguageName,
-    this.moments,
-    this.nickname,
-    this.onlineBegin,
-    this.onlineEnd,
-    this.portrait,
-    this.sendMsgFlag,
-    this.sendMsgPrice,
-    this.sex,
-    this.signature,
-    this.srcNickname,
-    this.tagList,
-    this.authType,
-    this.id,
-    this.username,
-    this.userStatus,
-    this.wallVoList,
-  );
+  const KekokukiAnchorModel({
+    this.albumUrlList = const [],
+    this.birthday = 0,
+    this.callPrice = 0,
+    this.countryCode = 0,
+    this.countryPath = '',
+    this.countryTitle = '',
+    this.faceFlag = false,
+    this.followCount = 0,
+    this.followedCount = 0,
+    this.followStatus = KekokukiFollowStatus.unFollow,
+    this.onlineStatus = KekokukOnlineStatus.offline,
+    this.language = 'en',
+    this.languageName = 'English',
+    this.levelModel = const KekokukAnchorLevelModel(),
+    this.likeFlag = 1,
+    this.likeMeCount = 0,
+    this.manyLanguage = '',
+    this.manyLanguageName = '',
+    this.moments = const [],
+    this.nickname = '',
+    this.onlineBegin = '',
+    this.onlineEnd = '',
+    this.portrait = '',
+    this.sendMsgFlag = false,
+    this.sendMsgPrice = 0,
+    this.sex = KekokukSex.female,
+    this.signature = '',
+    this.srcNickname = '',
+    this.tagList = const [],
+    this.authType = KekokukiAuthType.authedAnchor,
+    this.id = 0,
+    this.username = '',
+    this.userStatus = 1,
+    this.wallVoList = const [],
+  });
+
+  KekokukiAnchorModel copyWith({
+    final List<KekokukAnchorAlbumModel>? albumUrlList,
+    final int? birthday,
+    final int? callPrice,
+    final int? countryCode,
+    final String? countryPath,
+    final String? countryTitle,
+    final bool? faceFlag,
+    final int? followCount,
+    final int? followedCount,
+    final KekokukiFollowStatus? followStatus,
+    final KekokukOnlineStatus? onlineStatus,
+    final String? language,
+    final String? languageName,
+    final KekokukAnchorLevelModel? levelModel,
+    final int? likeFlag,
+    final int? likeMeCount,
+    final String? manyLanguage,
+    final String? manyLanguageName,
+    final List<KekokukAnchorMomentModel>? moments,
+    final String? nickname,
+    final String? onlineBegin,
+    final String? onlineEnd,
+    final String? portrait,
+    final bool? sendMsgFlag,
+    final int? sendMsgPrice,
+    final KekokukSex? sex,
+    final String? signature,
+    final String? srcNickname,
+    final List<String>? tagList,
+    final KekokukiAuthType? authType,
+    final int? id,
+    final String? username,
+    final int? userStatus,
+    List<KekokukAnchorGiftModel>? wallVoList,
+  }) {
+    return KekokukiAnchorModel(
+      albumUrlList: albumUrlList ?? this.albumUrlList,
+      birthday: birthday ?? this.birthday,
+      callPrice: callPrice ?? this.callPrice,
+      countryCode: countryCode ?? this.countryCode,
+      countryPath: countryPath ?? this.countryPath,
+      countryTitle: countryTitle ?? this.countryTitle,
+      faceFlag: faceFlag ?? this.faceFlag,
+      followCount: followCount ?? this.followCount,
+      followedCount: followedCount ?? this.followedCount,
+      followStatus: followStatus ?? this.followStatus,
+      onlineStatus: onlineStatus ?? this.onlineStatus,
+      language: language ?? this.language,
+      languageName: languageName ?? this.languageName,
+      levelModel: levelModel ?? this.levelModel,
+      likeFlag: likeFlag ?? this.likeFlag,
+      likeMeCount: likeMeCount ?? this.likeMeCount,
+      manyLanguage: manyLanguage ?? this.manyLanguage,
+      manyLanguageName: manyLanguageName ?? this.manyLanguageName,
+      moments: moments ?? this.moments,
+      nickname: nickname ?? this.nickname,
+      onlineBegin: onlineBegin ?? this.onlineBegin,
+      onlineEnd: onlineEnd ?? this.onlineEnd,
+      portrait: portrait ?? this.portrait,
+      sendMsgFlag: sendMsgFlag ?? this.sendMsgFlag,
+      sendMsgPrice: sendMsgPrice ?? this.sendMsgPrice,
+      sex: sex ?? this.sex,
+      signature: signature ?? this.signature,
+      srcNickname: srcNickname ?? this.srcNickname,
+      tagList: tagList ?? this.tagList,
+      authType: authType ?? this.authType,
+      id: id ?? this.id,
+      username: username ?? this.username,
+      userStatus: userStatus ?? this.userStatus,
+      wallVoList: wallVoList ?? this.wallVoList,
+    );
+  }
 
   factory KekokukiAnchorModel.fromJson(Map<String, dynamic> srcJson) => _$KekokukiAnchorModelFromJson(srcJson);
 
@@ -331,14 +424,14 @@ class KekokukAnchorLevelModel extends Object {
   @JsonKey(name: 'userIcon', defaultValue: '')
   final String userIcon;
 
-  KekokukAnchorLevelModel(
-    this.avatarFrame,
-    this.begin,
-    this.end,
-    this.icon,
-    this.level,
-    this.userIcon,
-  );
+  const KekokukAnchorLevelModel({
+    this.avatarFrame = '',
+    this.begin = 0,
+    this.end = 0,
+    this.icon = '',
+    this.level = 0,
+    this.userIcon = '',
+  });
 
   factory KekokukAnchorLevelModel.fromJson(Map<String, dynamic> srcJson) => _$KekokukAnchorLevelModelFromJson(srcJson);
 

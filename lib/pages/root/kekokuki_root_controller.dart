@@ -6,12 +6,12 @@ import 'package:kekokuki/pages/widgets/dialogs/kekokuki_confirm_dialog.dart';
 import 'package:kekokuki/pages/widgets/dialogs/kekokuki_dialog_util.dart';
 import '../../services/profile/kekokuki_profile_service.dart';
 import '../../services/config/kekokuki_config_service.dart';
-import '../../services/rtm/kekokuki_rtm_service.dart';
+import '../../services/rtm&rtc/kekokuki_rtm_service.dart';
 import '../chat/conversation/kekokuki_chat_conversation_mixin.dart';
-import 'kekokuki_home_state.dart';
+import 'kekokuki_root_state.dart';
 
-class KekokukiHomeController extends GetxController with KekokukiChatConversationMixin {
-  final state = KekokukiHomeState();
+class KekokukiRootController extends GetxController with KekokukiChatConversationMixin {
+  final state = KekokukiRootState();
 
   @override
   void onInit() {
@@ -51,7 +51,7 @@ class KekokukiHomeController extends GetxController with KekokukiChatConversatio
     }
   }
 
-  void onTapTabItem(KekokukiHomeTabType tabType) async {
+  void onTapTabItem(KekokukiRootTabType tabType) async {
     state.selectedTabTypeObs.value = tabType;
   }
 }

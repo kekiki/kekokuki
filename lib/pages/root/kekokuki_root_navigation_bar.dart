@@ -5,10 +5,10 @@ import 'package:kekokuki/services/styles/kekokuki_colors.dart';
 
 import '../../common/adapts/kekokuki_screen_adapt.dart';
 import '../../services/styles/kekokuki_styles.dart';
-import 'kekokuki_home_state.dart';
+import 'kekokuki_root_state.dart';
 
-class HomeNavigationBar extends StatelessWidget {
-  const HomeNavigationBar({
+class KekokukiRootNavigationBar extends StatelessWidget {
+  const KekokukiRootNavigationBar({
     super.key,
     required this.selectedType,
     required this.onTapTab,
@@ -16,8 +16,8 @@ class HomeNavigationBar extends StatelessWidget {
   });
 
   final int messageCount;
-  final KekokukiHomeTabType selectedType;
-  final ValueChanged<KekokukiHomeTabType> onTapTab;
+  final KekokukiRootTabType selectedType;
+  final ValueChanged<KekokukiRootTabType> onTapTab;
 
   @override
   Widget build(BuildContext context) {
@@ -32,37 +32,37 @@ class HomeNavigationBar extends StatelessWidget {
             iconNormal: Assets.imagesTabsKekokukiTab1Normal,
             iconSelected: Assets.imagesTabsKekokukiTab1Selected,
             title: 'kekokuki_discover'.tr,
-            isSelected: selectedType == KekokukiHomeTabType.anchors,
-            onTap: () => onTapTab(KekokukiHomeTabType.anchors),
+            isSelected: selectedType == KekokukiRootTabType.anchors,
+            onTap: () => onTapTab(KekokukiRootTabType.anchors),
           ),
           _ItemTab(
             iconNormal: Assets.imagesTabsKekokukiTab2Normal,
             iconSelected: Assets.imagesTabsKekokukiTab2Selected,
             title: 'kekokuki_match'.tr,
-            isSelected: selectedType == KekokukiHomeTabType.match,
-            onTap: () => onTapTab(KekokukiHomeTabType.match),
+            isSelected: selectedType == KekokukiRootTabType.match,
+            onTap: () => onTapTab(KekokukiRootTabType.match),
           ),
           _ItemTab(
             iconNormal: Assets.imagesTabsKekokukiTab2Normal,
             iconSelected: Assets.imagesTabsKekokukiTab2Selected,
             title: 'kekokuki_moment'.tr,
-            isSelected: selectedType == KekokukiHomeTabType.moment,
-            onTap: () => onTapTab(KekokukiHomeTabType.moment),
+            isSelected: selectedType == KekokukiRootTabType.moment,
+            onTap: () => onTapTab(KekokukiRootTabType.moment),
           ),
           _ItemTab(
             iconNormal: Assets.imagesTabsKekokukiTab3Normal,
             iconSelected: Assets.imagesTabsKekokukiTab3Selected,
             title: 'kekokuki_chat'.tr,
-            isSelected: selectedType == KekokukiHomeTabType.chat,
+            isSelected: selectedType == KekokukiRootTabType.chat,
             count: messageCount,
-            onTap: () => onTapTab(KekokukiHomeTabType.chat),
+            onTap: () => onTapTab(KekokukiRootTabType.chat),
           ),
           _ItemTab(
             iconNormal: Assets.imagesTabsKekokukiTab4Normal,
             iconSelected: Assets.imagesTabsKekokukiTab4Selected,
             title: 'kekokuki_mine'.tr,
-            isSelected: selectedType == KekokukiHomeTabType.mine,
-            onTap: () => onTapTab(KekokukiHomeTabType.mine),
+            isSelected: selectedType == KekokukiRootTabType.mine,
+            onTap: () => onTapTab(KekokukiRootTabType.mine),
           ),
         ],
       ),

@@ -45,23 +45,23 @@ dart run build_runner build --delete-conflicting-outputs
 
 - Android打包：APK测试包
 ```shell
-flutter build apk --flavor develop -t lib/main_develop.dart --shrink --obfuscate --split-debug-info=./mapping
+flutter build apk --flavor develop -t lib/main.dart --shrink --obfuscate --split-debug-info=./mapping --dart-define="package=1"
 ```
 
 - Android打包：AAB测试包
 ```shell
-flutter build appbundle --flavor develop -t lib/main_develop.dart
+flutter build appbundle --flavor develop -t lib/main.dart --dart-define="package=1"
 ```
 
 - 上架Android打包：AAB正式包
 ```shell
-flutter build appbundle --flavor production -t lib/main_production.dart --shrink --obfuscate --split-debug-info=./mapping
+flutter build appbundle --flavor production -t lib/main.dart --shrink --obfuscate --split-debug-info=./mapping --dart-define="package=1"
 ```
 
 - 上架iOS打包：IPA正式包
 ```shell
 flutter clean
-flutter build ipa --release --obfuscate --split-debug-info=./symbols  --target=lib/main_production.dart 
+flutter build ipa --release --obfuscate --split-debug-info=./symbols  --target=lib/main_production.dart --dart-define="package=1"
 
 - 提审方法1: 
 - cd /build/ios/archive

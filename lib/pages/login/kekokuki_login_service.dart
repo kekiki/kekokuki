@@ -7,10 +7,12 @@ import '../../common/extensions/kekokuki_string_ext.dart';
 import '../../common/utils/kekokuki_log_util.dart';
 import '../../common/utils/kekokuki_loading_util.dart';
 import '../../services/config/kekokuki_config_service.dart';
+import '../../services/database/kekokuki_database.dart';
 import '../../services/preference/kekokuki_app_preference.dart';
 import '../../services/profile/kekokuki_profile_service.dart';
 import '../../services/routes/kekokuki_routes.dart';
-import '../../services/rtm/kekokuki_rtm_service.dart';
+import '../../services/rtm&rtc/kekokuki_rtc_service.dart';
+import '../../services/rtm&rtc/kekokuki_rtm_service.dart';
 import '../call/services/kekokuki_call_service.dart';
 import '../chat/services/kekokuki_chat_service.dart';
 import 'kekokuki_login_info_model.dart';
@@ -19,6 +21,7 @@ import '../../services/api/kekokuki_api_client.dart';
 
 class KekokukiLoginService extends GetxService with WidgetsBindingObserver {
   final _apiClient = Get.find<KekokukiApiClient>();
+  final _database = Get.find<KekokukiDatabase>();
 
   late KekokukiLoginInfoModel _loginInfo;
   late KekokukiLoginRecordModel _loginRecord;
@@ -77,8 +80,14 @@ class KekokukiLoginService extends GetxService with WidgetsBindingObserver {
   Future<void> _clearLoginInfo() async {
     // TODO: 同时清空旧账号数据
     // 数据库清空
-
+    await _clearDatabase();
     await KekokukiAppPreference.user.clear();
+  }
+
+  Future<void> _clearDatabase() async {
+    await _database.anchorDao.clear();
+    await _database.chatConversationDao.clear();
+    await _database.chatMessageDao.clear();
   }
 
   Future<KekokukiLoginInfoModel> _queryLoginInfo() async {
@@ -203,6 +212,7 @@ class KekokukiLoginService extends GetxService with WidgetsBindingObserver {
     await Get.putAsync(() => KekokukiConfigService().init());
     await Get.putAsync(() => KekokukiProfileService().init());
     await Get.putAsync(() => KekokukiRtmService().init());
+    await Get.putAsync(() => KekokukiRtcService().init());
     await Get.putAsync(() => KekokukiCallService().init());
     await Get.putAsync(() => KekokukiChatService().init());
     Get.offAllNamed(KekokukiRoutes.home);
@@ -212,6 +222,7 @@ class KekokukiLoginService extends GetxService with WidgetsBindingObserver {
     if (!isLogin) return;
     await Get.delete<KekokukiChatService>(force: true);
     await Get.delete<KekokukiCallService>(force: true);
+    await Get.delete<KekokukiRtcService>(force: true);
     await Get.delete<KekokukiRtmService>(force: true);
     await Get.delete<KekokukiProfileService>(force: true);
     await Get.delete<KekokukiConfigService>(force: true);

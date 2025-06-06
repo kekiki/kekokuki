@@ -394,6 +394,98 @@ class _KekokukiApiClient implements KekokukiApiClient {
   }
 
   @override
+  Future<KekokukiApiResponse<KekokukiAivAnchorModel>> fetchAivAnchor() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<KekokukiApiResponse<KekokukiAivAnchorModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/user/anchor/getAivAnchor',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = KekokukiApiResponse<KekokukiAivAnchorModel>.fromJson(
+      _result.data!,
+      (json) => KekokukiAivAnchorModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<KekokukiApiResponse<KekokukiAnchorModel>> fetchAnchorInfo(
+      int anchorId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'userId': anchorId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<KekokukiApiResponse<KekokukiAnchorModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/user/user/getAnchorExpandV2',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = KekokukiApiResponse<KekokukiAnchorModel>.fromJson(
+      _result.data!,
+      (json) => KekokukiAnchorModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<KekokukiApiResponse<KekokukiAivAnchorModel>> fetchFreeVideo(
+      int anchorId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'anchorUserId': anchorId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<KekokukiApiResponse<KekokukiAivAnchorModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/user/anchor/getFreeVideo',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = KekokukiApiResponse<KekokukiAivAnchorModel>.fromJson(
+      _result.data!,
+      (json) => KekokukiAivAnchorModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<KekokukiApiResponse<String>> fetchTranslates() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -725,6 +817,66 @@ class _KekokukiApiClient implements KekokukiApiClient {
                   (i) => KekokukiRoomModel.fromJson(i as Map<String, dynamic>))
               .toList()
           : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<KekokukiApiResponse<dynamic>> createCall(String path) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'join_path': path};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<KekokukiApiResponse<dynamic>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/call/call/createCall/',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = KekokukiApiResponse<dynamic>.fromJson(
+      _result.data!,
+      (json) => json as dynamic,
+    );
+    return value;
+  }
+
+  @override
+  Future<KekokukiApiResponse<dynamic>> joinCall(String path) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'join_path': path};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<KekokukiApiResponse<dynamic>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/call/call/joinCall/',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = KekokukiApiResponse<dynamic>.fromJson(
+      _result.data!,
+      (json) => json as dynamic,
     );
     return value;
   }

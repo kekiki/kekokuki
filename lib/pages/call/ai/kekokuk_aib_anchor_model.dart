@@ -12,17 +12,19 @@ part 'kekokuk_aib_anchor_model.g.dart';
 
 @JsonSerializable()
 class KekokukAibAnchorModel extends Object {
+  @JsonKey(name: 'anchorUserId', defaultValue: 0)
+  int anchorId;
 
-	@JsonKey(name: 'anchorUserId')
-	num? anchorUserId;
+// 是否继续拉一次aiv，0.否，1.是
+  @JsonKey(name: 'continueAiv', defaultValue: 0)
+  int continueAiv;
 
-	@JsonKey(name: 'continueAiv')
-	num? continueAiv;
+  KekokukAibAnchorModel(
+    this.anchorId,
+    this.continueAiv,
+  );
 
-	KekokukAibAnchorModel(this.anchorUserId,this.continueAiv,);
+  factory KekokukAibAnchorModel.fromJson(Map<String, dynamic> srcJson) => _$KekokukAibAnchorModelFromJson(srcJson);
 
-	factory KekokukAibAnchorModel.fromJson(Map<String, dynamic> srcJson) => _$KekokukAibAnchorModelFromJson(srcJson);
-
-	Map<String, dynamic> toJson() => _$KekokukAibAnchorModelToJson(this);
-
+  Map<String, dynamic> toJson() => _$KekokukAibAnchorModelToJson(this);
 }

@@ -8,60 +8,65 @@ part of 'kekokuk_anchor_model.dart';
 
 KekokukiAnchorModel _$KekokukiAnchorModelFromJson(Map<String, dynamic> json) =>
     KekokukiAnchorModel(
-      (json['albumUrlList'] as List<dynamic>?)
+      albumUrlList: (json['albumUrlList'] as List<dynamic>?)
               ?.map((e) =>
                   KekokukAnchorAlbumModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          [],
-      (json['birthday'] as num?)?.toInt() ?? 0,
-      (json['callPrice'] as num?)?.toInt() ?? 0,
-      (json['countryCode'] as num?)?.toInt() ?? 0,
-      json['countryPath'] as String? ?? '',
-      json['countryTitle'] as String? ?? '',
-      json['faceFlag'] as bool? ?? false,
-      (json['followCount'] as num?)?.toInt() ?? 0,
-      (json['followedCount'] as num?)?.toInt() ?? 0,
-      $enumDecodeNullable(_$KekokukiFollowStatusEnumMap, json['followFlag']) ??
+          const [],
+      birthday: (json['birthday'] as num?)?.toInt() ?? 0,
+      callPrice: (json['callPrice'] as num?)?.toInt() ?? 0,
+      countryCode: (json['countryCode'] as num?)?.toInt() ?? 0,
+      countryPath: json['countryPath'] as String? ?? '',
+      countryTitle: json['countryTitle'] as String? ?? '',
+      faceFlag: json['faceFlag'] as bool? ?? false,
+      followCount: (json['followCount'] as num?)?.toInt() ?? 0,
+      followedCount: (json['followedCount'] as num?)?.toInt() ?? 0,
+      followStatus: $enumDecodeNullable(
+              _$KekokukiFollowStatusEnumMap, json['followFlag']) ??
           KekokukiFollowStatus.unFollow,
-      $enumDecodeNullable(_$KekokukOnlineStatusEnumMap, json['isOnline']) ??
-          KekokukOnlineStatus.offline,
-      json['language'] as String? ?? 'en',
-      json['languageName'] as String? ?? 'English',
-      json['levelConfig'] == null
-          ? null
+      onlineStatus:
+          $enumDecodeNullable(_$KekokukOnlineStatusEnumMap, json['isOnline']) ??
+              KekokukOnlineStatus.offline,
+      language: json['language'] as String? ?? 'en',
+      languageName: json['languageName'] as String? ?? 'English',
+      levelModel: json['levelConfig'] == null
+          ? const KekokukAnchorLevelModel()
           : KekokukAnchorLevelModel.fromJson(
               json['levelConfig'] as Map<String, dynamic>),
-      (json['likeFlag'] as num?)?.toInt() ?? 1,
-      (json['likeMeCount'] as num?)?.toInt() ?? 0,
-      json['manyLanguage'] as String? ?? '',
-      json['manyLanguageName'] as String? ?? '',
-      (json['moments'] as List<dynamic>?)
+      likeFlag: (json['likeFlag'] as num?)?.toInt() ?? 1,
+      likeMeCount: (json['likeMeCount'] as num?)?.toInt() ?? 0,
+      manyLanguage: json['manyLanguage'] as String? ?? '',
+      manyLanguageName: json['manyLanguageName'] as String? ?? '',
+      moments: (json['moments'] as List<dynamic>?)
               ?.map((e) =>
                   KekokukAnchorMomentModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          [],
-      json['nickname'] as String? ?? '',
-      json['onlineBegin'] as String? ?? '',
-      json['onlineEnd'] as String? ?? '',
-      json['portrait'] as String? ?? '',
-      json['sendMsgFlag'] as bool? ?? false,
-      (json['sendMsgPrice'] as num?)?.toInt() ?? 0,
-      $enumDecodeNullable(_$KekokukSexEnumMap, json['sex']) ??
+          const [],
+      nickname: json['nickname'] as String? ?? '',
+      onlineBegin: json['onlineBegin'] as String? ?? '',
+      onlineEnd: json['onlineEnd'] as String? ?? '',
+      portrait: json['portrait'] as String? ?? '',
+      sendMsgFlag: json['sendMsgFlag'] as bool? ?? false,
+      sendMsgPrice: (json['sendMsgPrice'] as num?)?.toInt() ?? 0,
+      sex: $enumDecodeNullable(_$KekokukSexEnumMap, json['sex']) ??
           KekokukSex.female,
-      json['signature'] as String? ?? '',
-      json['srcNickname'] as String? ?? '',
-      (json['tagList'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-          [],
-      $enumDecodeNullable(_$KekokukiAuthTypeEnumMap, json['userAuth']) ??
-          KekokukiAuthType.authedAnchor,
-      (json['userId'] as num?)?.toInt() ?? 0,
-      json['username'] as String? ?? '',
-      (json['userStatus'] as num?)?.toInt() ?? 1,
-      (json['wallVoList'] as List<dynamic>?)
+      signature: json['signature'] as String? ?? '',
+      srcNickname: json['srcNickname'] as String? ?? '',
+      tagList: (json['tagList'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      authType:
+          $enumDecodeNullable(_$KekokukiAuthTypeEnumMap, json['userAuth']) ??
+              KekokukiAuthType.authedAnchor,
+      id: (json['userId'] as num?)?.toInt() ?? 0,
+      username: json['username'] as String? ?? '',
+      userStatus: (json['userStatus'] as num?)?.toInt() ?? 1,
+      wallVoList: (json['wallVoList'] as List<dynamic>?)
               ?.map((e) =>
                   KekokukAnchorGiftModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          [],
+          const [],
     );
 
 Map<String, dynamic> _$KekokukiAnchorModelToJson(
@@ -80,7 +85,7 @@ Map<String, dynamic> _$KekokukiAnchorModelToJson(
       'isOnline': _$KekokukOnlineStatusEnumMap[instance.onlineStatus]!,
       'language': instance.language,
       'languageName': instance.languageName,
-      'levelConfig': instance.levelModel?.toJson(),
+      'levelConfig': instance.levelModel.toJson(),
       'likeFlag': instance.likeFlag,
       'likeMeCount': instance.likeMeCount,
       'manyLanguage': instance.manyLanguage,
@@ -195,12 +200,12 @@ Map<String, dynamic> _$KekokukAnchorMomentModelToJson(
 KekokukAnchorLevelModel _$KekokukAnchorLevelModelFromJson(
         Map<String, dynamic> json) =>
     KekokukAnchorLevelModel(
-      json['avatarFrame'] as String? ?? '',
-      (json['begin'] as num?)?.toInt() ?? 0,
-      (json['end'] as num?)?.toInt() ?? 0,
-      json['icon'] as String? ?? '',
-      (json['level'] as num?)?.toInt() ?? 0,
-      json['userIcon'] as String? ?? '',
+      avatarFrame: json['avatarFrame'] as String? ?? '',
+      begin: (json['begin'] as num?)?.toInt() ?? 0,
+      end: (json['end'] as num?)?.toInt() ?? 0,
+      icon: json['icon'] as String? ?? '',
+      level: (json['level'] as num?)?.toInt() ?? 0,
+      userIcon: json['userIcon'] as String? ?? '',
     );
 
 Map<String, dynamic> _$KekokukAnchorLevelModelToJson(

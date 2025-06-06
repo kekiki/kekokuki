@@ -7,11 +7,11 @@ import '../explore/kekokuki_explore_page.dart';
 import '../match/kekokuki_match_page.dart';
 import '../mine/kekokuki_mine_page.dart';
 import '../moment/list/kekokuki_moment_list_page.dart';
-import 'kekokuki_home_controller.dart';
-import 'kekokuki_home_navigation_bar.dart';
+import 'kekokuki_root_controller.dart';
+import 'kekokuki_root_navigation_bar.dart';
 
-class KekokukiHomePage extends GetView<KekokukiHomeController> {
-  const KekokukiHomePage({super.key});
+class KekokukiRootPage extends GetView<KekokukiRootController> {
+  const KekokukiRootPage({super.key});
 
   static const homePages = [
     KekokukiExplorePage(),
@@ -27,7 +27,6 @@ class KekokukiHomePage extends GetView<KekokukiHomeController> {
     return KekokukiAppScaffold(
       isAllowBack: false,
       onBackPressed: controller.onBack,
-      extendBodyBehindAppBar: true,
       body: Obx(() {
         return IndexedStack(
           sizing: StackFit.expand,
@@ -36,7 +35,7 @@ class KekokukiHomePage extends GetView<KekokukiHomeController> {
         );
       }),
       bottomNavigationBar: Obx(() {
-        return HomeNavigationBar(
+        return KekokukiRootNavigationBar(
           selectedType: state.selectedTabTypeObs.value,
           messageCount: state.unReadMessageCountObs.value,
           onTapTab: controller.onTapTabItem,

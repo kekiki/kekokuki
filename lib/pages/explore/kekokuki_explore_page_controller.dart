@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:kekokuki/services/api/kekokuki_api_client.dart';
 import 'package:kekokuki/services/api/kekokuki_api_response_ext.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:kekokuki/services/database/kekokuki_database.dart';
 
 import 'anchor_detail/kekokuk_anchor_model.dart';
 
@@ -34,6 +35,8 @@ class KekokukiExplorePageController extends GetxController {
 
   Future<List<KekokukiAnchorModel>> _fetchAnchorList(KekokukiAnchorListPageKeyType pageKey) async {
     final response = await _client.fetchAnchorList().response;
-    return response.data ?? [];
+    final list = response.data ?? [];
+    Get.find<KekokukiDatabase>().anchorDao.insertAnchorList(list);
+    return list;
   }
 }

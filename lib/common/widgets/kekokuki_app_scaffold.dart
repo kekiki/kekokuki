@@ -9,8 +9,6 @@ class KekokukiAppScaffold extends StatelessWidget {
   final VoidCallback? onBackPressed;
   final Color backgroundColor;
   final Decoration? backgroundDecoration;
-  final bool safeTop;
-  final bool safeBottom;
   final bool resizeToAvoidBottomInset;
   final bool extendBodyBehindAppBar;
   final bool extendBody;
@@ -21,8 +19,6 @@ class KekokukiAppScaffold extends StatelessWidget {
     this.appBar,
     this.bottomNavigationBar,
     this.isAllowBack = true,
-    this.safeTop = true,
-    this.safeBottom = true,
     this.onBackPressed,
     this.backgroundDecoration,
     this.backgroundColor = Colors.white,
@@ -57,11 +53,7 @@ class KekokukiAppScaffold extends StatelessWidget {
         bottomNavigationBar: bottomNavigationBar,
         extendBodyBehindAppBar: extendBodyBehindAppBar,
         extendBody: extendBody,
-        body: SafeArea(
-          top: safeTop,
-          bottom: safeBottom,
-          child: body ?? const SizedBox(),
-        ),
+        body: body ?? const SizedBox(),
       ),
     );
   }

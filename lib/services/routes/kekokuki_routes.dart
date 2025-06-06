@@ -1,14 +1,16 @@
 import 'package:get/get.dart';
 
+import '../../pages/call/going/kekokuki_call_going_page.dart';
+import '../../pages/call/going/kekokuki_call_going_page_controller.dart';
 import '../../pages/chat/conversation/kekokuki_chat_conversation_page_controller.dart';
 import '../../pages/explore/kekokuki_explore_page_controller.dart';
-import '../../pages/home/kekokuki_home_controller.dart';
+import '../../pages/root/kekokuki_root_controller.dart';
 import '../../pages/login/kekokuki_login_controller.dart';
 import '../../pages/match/kekokuki_match_page_controller.dart';
 import '../../pages/mine/kekokuki_mine_page_controller.dart';
 import '../../pages/moment/list/kekokuki_moment_list_page_controller.dart';
 import '../../splash/kekokuki_splash_controller.dart';
-import '../../pages/home/kekokuki_home_page.dart';
+import '../../pages/root/kekokuki_root_page.dart';
 import '../../pages/login/kekokuki_login_page.dart';
 import '../../splash/kekokuki_splash_page.dart';
 
@@ -16,6 +18,11 @@ abstract class KekokukiRoutes {
   static const splash = "/splash";
   static const login = "/login";
   static const home = "/home";
+
+  static const callGoing = "/callGoing";
+  static const callComming = "/callComming";
+  static const callCalling = "/callCalling";
+  static const callFinished = "/callFinished";
 
   static final getPageList = [
     GetPage(
@@ -30,8 +37,8 @@ abstract class KekokukiRoutes {
     ),
     GetPage(
       name: home,
-      page: () => const KekokukiHomePage(),
-      binding: BindingsBuilder.put(() => KekokukiHomeController()),
+      page: () => const KekokukiRootPage(),
+      binding: BindingsBuilder.put(() => KekokukiRootController()),
       bindings: [
         BindingsBuilder(() => Get.lazyPut(() => KekokukiExplorePageController())),
         BindingsBuilder(() => Get.lazyPut(() => KekokukiMatchPageController())),
@@ -39,6 +46,11 @@ abstract class KekokukiRoutes {
         BindingsBuilder(() => Get.lazyPut(() => KekokukiChatConversationPageController())),
         BindingsBuilder(() => Get.lazyPut(() => KekokukiMinePageController())),
       ],
+    ),
+    GetPage(
+      name: callGoing,
+      page: () => const KekokukiCallGoingPage(),
+      binding: BindingsBuilder.put(() => KekokukiCallGoingPageController()),
     ),
   ];
 }

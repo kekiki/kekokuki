@@ -144,7 +144,9 @@ KekokukiProfilePropModel _$KekokukiProfilePropModelFromJson(
       icon: json['icon'] as String? ?? '',
       name: json['name'] as String? ?? '',
       propNum: (json['propNum'] as num?)?.toInt() ?? 0,
-      propType: (json['propType'] as num?)?.toInt() ?? 0,
+      propType:
+          $enumDecodeNullable(_$KekokukiPropTypeEnumMap, json['propType']) ??
+              KekokukiPropType.unknown,
       propValue: (json['propValue'] as num?)?.toInt() ?? 0,
     );
 
@@ -155,6 +157,16 @@ Map<String, dynamic> _$KekokukiProfilePropModelToJson(
       'icon': instance.icon,
       'name': instance.name,
       'propNum': instance.propNum,
-      'propType': instance.propType,
+      'propType': _$KekokukiPropTypeEnumMap[instance.propType]!,
       'propValue': instance.propValue,
     };
+
+const _$KekokukiPropTypeEnumMap = {
+  KekokukiPropType.unknown: -1,
+  KekokukiPropType.callCard: 1,
+  KekokukiPropType.diamondCard: 2,
+  KekokukiPropType.giftCard: 3,
+  KekokukiPropType.chatCard: 4,
+  KekokukiPropType.matchCard: 5,
+  KekokukiPropType.frame: 6,
+};

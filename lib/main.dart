@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+// import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 
@@ -15,8 +15,9 @@ import 'services/routes/kekokuki_routes.dart';
 void main() {
   runZoned(
     () async {
-      final widgetBinding = WidgetsFlutterBinding.ensureInitialized();
+      // final widgetBinding = WidgetsFlutterBinding.ensureInitialized();
       // FlutterNativeSplash.preserve(widgetsBinding: widgetBinding);
+      WidgetsFlutterBinding.ensureInitialized();
 
       FlutterError.onError = (FlutterErrorDetails details) {
         FlutterError.presentError(details);

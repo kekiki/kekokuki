@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-enum KekokukiHomeTabType {
+enum KekokukiRootTabType {
   anchors,
   match,
   moment,
@@ -8,7 +8,7 @@ enum KekokukiHomeTabType {
   mine,
 }
 
-class KekokukiHomeState {
-  final selectedTabTypeObs = KekokukiHomeTabType.anchors.obs;
+class KekokukiRootState {
+  final selectedTabTypeObs = KekokukiRootTabType.anchors.obs;
   final unReadMessageCountObs = 0.obs;
 }

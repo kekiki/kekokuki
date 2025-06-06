@@ -6,15 +6,17 @@ import 'package:kekokuki/pages/chat/message/kekokuki_chat_message_page.dart';
 import '../../../common/widgets/kekokuki_round_image_widget.dart';
 import '../../../generated/assets.dart';
 import '../../../services/database/kekokuki_database.dart';
+import '../../../services/rtm&rtc/kekokuki_rtm_service.dart';
 import '../conversation/kekokuki_chat_conversation_model.dart';
 import '../message/kekokuki_chat_message_model.dart';
 
 class KekokukiChatService extends GetxService {
   final _database = Get.find<KekokukiDatabase>();
 
-  // 如果没有系统消息会话就新增一个
   Future<KekokukiChatService> init() async {
+    // 如果没有系统消息会话就新增一个
     await _addSystemConversationIfNeeded();
+    Get.find<KekokukiRtmService>().onReceivedChatMessage = _onReceivedMessage;
     return this;
   }
 
@@ -27,7 +29,7 @@ class KekokukiChatService extends GetxService {
   }
 
   // 收到私聊消息入口，由RTM调用
-  Future<void> receivedMessage(KekokukiChatMessageModel message) async {
+  Future<void> _onReceivedMessage(KekokukiChatMessageModel message) async {
     //存储消息
     _database.chatMessageDao.insert(message);
 

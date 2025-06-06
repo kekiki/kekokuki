@@ -19,6 +19,17 @@ class KekokukiHeaderInterceptor extends Interceptor {
       headers[key] = value;
     });
     options.headers = headers;
+
+    // 接口路径拼接
+    if (options.queryParameters.containsKey('join_path')) {
+      options.path += options.queryParameters['join_path'];
+    }
+
+    final body = options.data as Map<String, dynamic>?;
+    if (body != null && body.containsKey('join_path')) {
+      options.path += body['join_path'];
+    }
+
     handler.next(options);
   }
 

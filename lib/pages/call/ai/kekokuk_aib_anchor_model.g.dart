@@ -9,13 +9,13 @@ part of 'kekokuk_aib_anchor_model.dart';
 KekokukAibAnchorModel _$KekokukAibAnchorModelFromJson(
         Map<String, dynamic> json) =>
     KekokukAibAnchorModel(
-      json['anchorUserId'] as num?,
-      json['continueAiv'] as num?,
+      (json['anchorUserId'] as num?)?.toInt() ?? 0,
+      (json['continueAiv'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$KekokukAibAnchorModelToJson(
         KekokukAibAnchorModel instance) =>
     <String, dynamic>{
-      'anchorUserId': instance.anchorUserId,
+      'anchorUserId': instance.anchorId,
       'continueAiv': instance.continueAiv,
     };

@@ -150,6 +150,19 @@ class KekokukiProfileModel extends Object {
   @JsonKey(name: 'vipSignFlag', defaultValue: 0)
   final int vipSignFlag;
 
+  int get matchCardNum => _getNumOfProp(KekokukiPropType.matchCard);
+  int get chatCardNum => _getNumOfProp(KekokukiPropType.chatCard);
+  int get callCardNum => _getNumOfProp(KekokukiPropType.callCard);
+
+  int _getNumOfProp(KekokukiPropType propType) {
+    if (propVoList.isEmpty) return 0;
+    final resultList = propVoList.where((element) => element.propType == propType);
+    if (resultList.isNotEmpty) {
+      return resultList.first.propNum;
+    }
+    return 0;
+  }
+
   const KekokukiProfileModel({
     this.birthday = 0,
     this.boundGoogle = 0,
@@ -238,6 +251,22 @@ class KekokukProfileLevelModel extends Object {
   Map<String, dynamic> toJson() => _$KekokukProfileLevelModelToJson(this);
 }
 
+/// 道具类型，1.视频卡，2.钻石加成卡，3.礼物卡，4.聊天卡，5.匹配卡 ,6.头像框
+@JsonEnum(valueField: 'value')
+enum KekokukiPropType {
+  unknown(-1), // 未知道具类型
+  callCard(1),
+  diamondCard(2),
+  giftCard(3),
+  chatCard(4),
+  matchCard(5),
+  frame(6);
+
+  const KekokukiPropType(this.value);
+
+  final int value;
+}
+
 @JsonSerializable()
 class KekokukiProfilePropModel extends Object {
   @JsonKey(name: 'animEffectUrl', defaultValue: '')
@@ -252,8 +281,8 @@ class KekokukiProfilePropModel extends Object {
   @JsonKey(name: 'propNum', defaultValue: 0)
   final int propNum;
 
-  @JsonKey(name: 'propType', defaultValue: 0)
-  final int propType;
+  @JsonKey(name: 'propType', defaultValue: KekokukiPropType.unknown)
+  final KekokukiPropType propType;
 
   @JsonKey(name: 'propValue', defaultValue: 0)
   final int propValue;
@@ -263,7 +292,7 @@ class KekokukiProfilePropModel extends Object {
     this.icon = '',
     this.name = '',
     this.propNum = 0,
-    this.propType = 0,
+    this.propType = KekokukiPropType.unknown,
     this.propValue = 0,
   });
 

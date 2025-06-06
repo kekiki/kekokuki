@@ -5,6 +5,7 @@ import 'package:retrofit/retrofit.dart';
 
 import '../../pages/call/ai/kekokuk_aib_anchor_model.dart';
 import '../../pages/call/ai/kekokuki_ai_config_model.dart';
+import '../../pages/call/ai/kekokuki_aiv_anchor_model.dart';
 import '../../pages/chat/message/kekokuk_sensitive_word_model.dart';
 import '../../pages/explore/anchor_detail/kekokuk_anchor_model.dart';
 import '../../pages/explore/anchor_list/kekokuki_anchor_area_model.dart';
@@ -82,6 +83,17 @@ abstract class KekokukiApiClient {
   @GET('/user/anchor/getAibAnchor')
   Future<KekokukiApiResponse<KekokukAibAnchorModel>> fetchAibAnchor();
 
+  @GET('/user/anchor/getAivAnchor')
+  Future<KekokukiApiResponse<KekokukiAivAnchorModel>> fetchAivAnchor();
+
+  // /user/user/getAnchorExpandV2?userId=$anchorId
+  @GET('/user/user/getAnchorExpandV2')
+  Future<KekokukiApiResponse<KekokukiAnchorModel>> fetchAnchorInfo(@Query('userId') int anchorId);
+
+// /user/anchor/getFreeVideo?anchorUserId=$anchorId
+  @GET('/user/anchor/getFreeVideo')
+  Future<KekokukiApiResponse<KekokukiAivAnchorModel>> fetchFreeVideo(@Query('anchorUserId') int anchorId);
+
   /// System API
 
 // 返回当前翻译文档地址，使用需下载
@@ -121,4 +133,17 @@ abstract class KekokukiApiClient {
 
   @GET('/game/game/getGlobalRoomMsg')
   Future<KekokukiApiResponse<List<KekokukiRoomModel>>> fetchGlobalRoomMsgList();
+
+  /// Call API
+
+  // /call/call/createCall/$callType/$userId
+  @POST('/call/call/createCall/')
+  Future<KekokukiApiResponse<dynamic>> createCall(
+    @Field('join_path') String path,
+  );
+
+  @POST('/call/call/joinCall/')
+  Future<KekokukiApiResponse<dynamic>> joinCall(
+    @Field('join_path') String path,
+  );
 }
