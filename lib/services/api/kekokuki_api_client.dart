@@ -6,6 +6,7 @@ import 'package:retrofit/retrofit.dart';
 import '../../pages/call/ai/kekokuk_aib_anchor_model.dart';
 import '../../pages/call/ai/kekokuki_ai_config_model.dart';
 import '../../pages/call/ai/kekokuki_aiv_anchor_model.dart';
+import '../../pages/call/going/kekokuki_call_channel_model.dart';
 import '../../pages/chat/message/kekokuk_sensitive_word_model.dart';
 import '../../pages/explore/anchor_detail/kekokuk_anchor_model.dart';
 import '../../pages/explore/anchor_list/kekokuki_anchor_area_model.dart';
@@ -142,8 +143,16 @@ abstract class KekokukiApiClient {
     @Field('join_path') String path,
   );
 
+  // /call/call/joinCall/$channelId
   @POST('/call/call/joinCall/')
-  Future<KekokukiApiResponse<dynamic>> joinCall(
+  Future<KekokukiApiResponse<KekokukiCallChannelModel>> joinCall(
     @Field('join_path') String path,
+  );
+
+  @POST('/call/call/cancelCall')
+  Future<KekokukiApiResponse<dynamic>> cancelCall(
+    @Field('channelId') int channelId,
+    @Field('endType') int endType,
+    @Field('matchMode') int? matchMode,
   );
 }

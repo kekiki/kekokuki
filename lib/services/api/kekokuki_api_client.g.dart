@@ -852,11 +852,52 @@ class _KekokukiApiClient implements KekokukiApiClient {
   }
 
   @override
-  Future<KekokukiApiResponse<dynamic>> joinCall(String path) async {
+  Future<KekokukiApiResponse<KekokukiCallChannelModel>> joinCall(
+      String path) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'join_path': path};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<KekokukiApiResponse<KekokukiCallChannelModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/call/call/joinCall/',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = KekokukiApiResponse<KekokukiCallChannelModel>.fromJson(
+      _result.data!,
+      (json) => KekokukiCallChannelModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<KekokukiApiResponse<dynamic>> cancelCall(
+    int channelId,
+    int endType,
+    int? matchMode,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'channelId': channelId,
+      'endType': endType,
+      'matchMode': matchMode,
+    };
+    _data.removeWhere((k, v) => v == null);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<KekokukiApiResponse<dynamic>>(Options(
       method: 'POST',
@@ -865,7 +906,7 @@ class _KekokukiApiClient implements KekokukiApiClient {
     )
             .compose(
               _dio.options,
-              '/call/call/joinCall/',
+              '/call/call/cancelCall',
               queryParameters: queryParameters,
               data: _data,
             )

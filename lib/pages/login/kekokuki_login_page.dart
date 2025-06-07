@@ -9,7 +9,7 @@ import 'package:kekokuki/services/styles/kekokuki_colors.dart';
 import '../../common/widgets/kekokuki_app_scaffold.dart';
 import '../../common/widgets/kekokuki_shake_widget.dart';
 import '../../services/config/kekokuki_app_config.dart';
-import '../../test_tools/kekokuki_test_tools_page.dart';
+import '../../test/kekokuki_test_main_page.dart';
 import 'kekokuki_login_controller.dart';
 
 class KekokukiLoginPage extends GetView<KekokukiLoginController> {
@@ -22,7 +22,7 @@ class KekokukiLoginPage extends GetView<KekokukiLoginController> {
         actions: [
           if (KekokukiAppConfig.enableTestTools) ...[
             IconButton(
-              onPressed: () => Get.to(() => const KekokukiTestToolsPage()),
+              onPressed: () => Get.to(() => const KekokukiTestMainPage()),
               icon: const Icon(
                 Icons.construction,
                 color: Colors.black,

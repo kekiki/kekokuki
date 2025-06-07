@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kekokuki/test_tools/kekokuki_test_tools_page.dart';
+import 'package:kekokuki/test/kekokuki_test_main_page.dart';
 
 import '../../common/widgets/kekokuki_app_bar.dart';
 import '../../common/widgets/kekokuki_app_scaffold.dart';
@@ -22,7 +22,7 @@ class KekokukiMinePage extends GetView<KekokukiMinePageController> {
         actions: [
           if (KekokukiAppConfig.enableTestTools) ...[
             IconButton(
-              onPressed: () => Get.to(() => const KekokukiTestToolsPage()),
+              onPressed: () => Get.to(() => const KekokukiTestMainPage()),
               icon: const Icon(
                 Icons.construction,
                 color: Colors.black,

@@ -60,3 +60,10 @@ enum KekokukiCallEndStatus {
 
   final int value;
 }
+
+class KekokukiCallModel {
+  final int anchorId;
+  final KekokukiCallType callType;
+
+  const KekokukiCallModel(this.anchorId, this.callType);
+}

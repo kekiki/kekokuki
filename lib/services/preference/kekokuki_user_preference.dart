@@ -32,4 +32,8 @@ class KekokukiUserPreference {
   // profile model
   set profileModelJson(Map<String, dynamic> value) => _box.put('profileModelJson', jsonEncode(value));
   Map<String, dynamic> get profileModelJson => jsonDecode(_box.get('profileModelJson', defaultValue: '{}'));
+
+  // privacy mode
+  bool get privacyCamera => _box.get('privacyCamera', defaultValue: false);
+  set privacyCamera(bool value) => _box.put('privacyCamera', value);
 }

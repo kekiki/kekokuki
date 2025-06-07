@@ -307,8 +307,8 @@ class KekokukiRtmService extends GetxService {
     try {
       await _rtmCall?.cancelLocalInvitation(_localInvitation!);
       return true;
-    } catch (e, s) {
-      KekokukiLogUtil.e(_tag, "cancelLocalInvitation failed: ${e.toString()}", s);
+    } on AgoraRtmCallManagerException catch (e, s) {
+      KekokukiLogUtil.e(_tag, "cancelLocalInvitation failed: [code: ${e.code}, reason: ${e.reason}]", s);
       return false;
     }
   }

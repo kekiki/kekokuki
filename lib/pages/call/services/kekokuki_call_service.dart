@@ -2,14 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:kekokuki/pages/call/going/kekokuki_call_going_page.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common/utils/kekokuki_log_util.dart';
 import '../../../services/rtm&rtc/kekokuki_rtc_service.dart';
 import '../../../services/rtm&rtc/kekokuki_rtm_service.dart';
 import '../../chat/message/kekokuki_chat_message_model.dart';
-import '../../widgets/dialogs/permission/kekokuki_permission_dialog.dart';
 import 'kekokuki_call_model.dart';
 
 class KekokukiCallInvitationHandle {
@@ -35,13 +32,17 @@ class KekokukiCallService extends GetxService {
   KekokukiCallStatus _callStatus = KekokukiCallStatus.none;
 
   Future<KekokukiCallService> init() async {
-    Get.find<KekokukiRtmService>()
+    _rtmService
       ..onReceivedMessageInCall = _onReceivedMessage
       ..onReceivedCallInvitation = _onReceivedCallInvitation;
     return this;
   }
 
   Future<void> release() async {
+    _rtmService
+      ..onAnchorReceivedInvitation = null
+      ..onAnchorAcceptedInvitation = null
+      ..onAnchorRefusededInvitation = null;
     await _rtcService.release();
   }
 
@@ -52,15 +53,15 @@ class KekokukiCallService extends GetxService {
     super.onClose();
   }
 
+  void _updateCallStatus(KekokukiCallStatus status) {
+    _callStatus = status;
+    _streamController.add(status);
+  }
+
   void _onReceivedMessage(int anchorId, String message) {}
 
   void _onReceivedCallInvitation(int anchorId, String channelId) {
     _updateCallStatus(KekokukiCallStatus.comming);
-  }
-
-  void _updateCallStatus(KekokukiCallStatus status) {
-    _callStatus = status;
-    _streamController.add(status);
   }
 
   Future<void> sendCallInvitation({
@@ -70,14 +71,27 @@ class KekokukiCallService extends GetxService {
     bool matchPrivacyMode = false,
     KekokukiCallInvitationHandle? handle,
   }) async {
-    _rtmService.onAnchorReceivedInvitation = handle?.onAnchorReceivedInvitation;
-    _rtmService.onAnchorAcceptedInvitation = handle?.onAnchorAcceptedInvitation;
-    _rtmService.onAnchorRefusededInvitation = handle?.onAnchorRefusededInvitation;
-    _rtmService.sendLocalInvitation(anchorId: anchorId, channelId: channelId, callType: callType, matchPrivacyMode: matchPrivacyMode);
+    _rtmService
+      ..onAnchorReceivedInvitation = handle?.onAnchorReceivedInvitation
+      ..onAnchorAcceptedInvitation = handle?.onAnchorAcceptedInvitation
+      ..onAnchorRefusededInvitation = handle?.onAnchorRefusededInvitation;
+    await _rtmService.sendLocalInvitation(anchorId: anchorId, channelId: channelId, callType: callType, matchPrivacyMode: matchPrivacyMode);
   }
 
-  Future<void> cancelCallInvitation({required int anchorId}) async {
-    _rtmService.cancelLocalInvitation();
+  Future<void> cancelCallInvitation() async {
+    await _rtmService.cancelLocalInvitation();
+  }
+
+  Future<void> joinCallChannel({
+    required int anchorId,
+    required String channelId,
+    required String token,
+    void Function()? onSelfJoined,
+    void Function()? onAnchorJoined,
+  }) async {
+    await _rtcService.initRtcEngine();
+    _rtcService.listen(anchorId: anchorId, onSelfJoined: onSelfJoined, onAnchorJoined: onAnchorJoined);
+    await _rtcService.joinChannel(anchorId: anchorId, channelId: channelId, token: token);
   }
 
   /// 发送开启或关闭隐私模式消息

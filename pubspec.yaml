@@ -99,6 +99,8 @@ dependencies:
   infinite_scroll_pagination: ^5.0.0
   audio_session: ^0.1.25
   just_audio: ^0.9.46
+  video_player: ^2.9.5
+  wakelock: ^0.6.2
   
   # data statistics
   # advertising_id: ^2.7.1

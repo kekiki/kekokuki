@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kekokuki/services/routes/kekokuki_routes.dart';
@@ -23,18 +25,24 @@ class KekokukiCallGoingPage extends GetView<KekokukiCallGoingPageController> {
   Widget build(BuildContext context) {
     return KekokukiAppScaffold(
       isAllowBack: false,
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      body: Obx(() {
-        return GestureDetector(
-          onTap: Get.back,
-          child: KekokukiRoundImageWidget(
-            width: Get.width,
-            height: Get.height,
-            controller.anchorObs.value?.portrait ?? '',
+      body: Stack(
+        children: [
+          Obx(() {
+            return GestureDetector(
+              onTap: Get.back,
+              child: KekokukiRoundImageWidget(
+                width: Get.width,
+                height: Get.height,
+                controller.anchorObs.value.portrait,
+              ),
+            );
+          }),
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: ColoredBox(color: Colors.black.withOpacity(0.3)),
           ),
-        );
-      }),
+        ],
+      ),
     );
   }
 }

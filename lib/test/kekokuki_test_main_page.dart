@@ -3,14 +3,15 @@ import 'package:get/get.dart';
 import 'package:kekokuki/pages/login/kekokuki_login_service.dart';
 import 'package:kekokuki/common/utils/kekokuki_log_util.dart';
 import 'package:kekokuki/services/preference/kekokuki_app_preference.dart';
+import 'package:kekokuki/test/kekokuki_test_call_page.dart';
 
 import '../common/widgets/kekokuki_app_bar.dart';
 import '../common/widgets/kekokuki_app_scaffold.dart';
 import '../services/styles/kekokuki_styles.dart';
 import 'kekokuki_test_log_page.dart';
 
-class KekokukiTestToolsPage extends StatelessWidget {
-  const KekokukiTestToolsPage({super.key});
+class KekokukiTestMainPage extends StatelessWidget {
+  const KekokukiTestMainPage({super.key});
 
   KekokukiLoginService get _loginService => Get.find<KekokukiLoginService>();
 
@@ -57,10 +58,11 @@ class KekokukiTestToolsPage extends StatelessWidget {
             title: Text('弹窗测试'),
             trailing: Icon(Icons.navigate_next_rounded, size: 20),
           ),
-          const ListTile(
+          ListTile(
             tileColor: Colors.white,
-            title: Text('通话测试'),
-            trailing: Icon(Icons.navigate_next_rounded, size: 20),
+            title: const Text('通话测试'),
+            trailing: const Icon(Icons.navigate_next_rounded, size: 20),
+            onTap: () => Get.to(() => const KekokukiTestCallPage()),
           ),
         ],
       ],

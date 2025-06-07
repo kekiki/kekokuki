@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../common/utils/kekokuki_log_util.dart';
+import '../../pages/explore/anchor_detail/kekokuki_anchor_repository.dart';
 import '../database/kekokuki_database_service.dart';
 import '../preference/kekokuki_app_preference.dart';
 import '../../common/utils/kekokuki_path_util.dart';
@@ -79,5 +80,7 @@ class KekokukiAppConfig {
     await Get.putAsync(() => KekokukiApiService().init());
     await Get.putAsync(() => KekokukiDatabaseService().init());
     await Get.putAsync(() => KekokukiLoginService().init());
+
+    Get.lazyPut(() => KekokukiAnchorRepository(), fenix: true);
   }
 }

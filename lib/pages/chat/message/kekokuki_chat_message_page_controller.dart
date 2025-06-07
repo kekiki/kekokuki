@@ -7,6 +7,8 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../../services/profile/kekokuki_profile_mixin.dart';
 import '../../../services/profile/kekokuki_profile_model.dart';
+import '../../call/going/kekokuki_call_going_page.dart';
+import '../../call/services/kekokuki_call_model.dart';
 import '../../widgets/dialogs/permission/kekokuki_permission_dialog.dart';
 import 'kekokuki_chat_message_mixin.dart';
 import 'kekokuki_chat_message_model.dart';
@@ -91,6 +93,7 @@ class KekokukiChatMessagePageController extends GetxController with KekokukiChat
     //   KekokukiRoutes.anchorDetail,
     //   arguments: state.anchorInfoObs.value,
     // );
+    KekokukiCallGoingPage.show(anchorId: _anchorId, callType: KekokukiCallType.anchor);
   }
 
   void onTapUserAvatar() {

@@ -1,5 +1,11 @@
 import 'package:get/get.dart';
 
+import '../../pages/call/calling/kekokuki_calling_page.dart';
+import '../../pages/call/calling/kekokuki_calling_page_controller.dart';
+import '../../pages/call/comming/kekokuki_call_comming_page.dart';
+import '../../pages/call/comming/kekokuki_call_comming_page_controller.dart';
+import '../../pages/call/finished/kekokuki_call_finished_page.dart';
+import '../../pages/call/finished/kekokuki_call_finished_page_controller.dart';
 import '../../pages/call/going/kekokuki_call_going_page.dart';
 import '../../pages/call/going/kekokuki_call_going_page_controller.dart';
 import '../../pages/chat/conversation/kekokuki_chat_conversation_page_controller.dart';
@@ -51,6 +57,21 @@ abstract class KekokukiRoutes {
       name: callGoing,
       page: () => const KekokukiCallGoingPage(),
       binding: BindingsBuilder.put(() => KekokukiCallGoingPageController()),
+    ),
+    GetPage(
+      name: callComming,
+      page: () => const KekokukiCallCommingPage(),
+      binding: BindingsBuilder.put(() => KekokukiCallCommingPageController()),
+    ),
+    GetPage(
+      name: callCalling,
+      page: () => const KekokukiCallingPage(),
+      binding: BindingsBuilder.put(() => KekokukiCallingPageController()),
+    ),
+    GetPage(
+      name: callFinished,
+      page: () => const KekokukiCallFinishedPage(),
+      binding: BindingsBuilder.put(() => KekokukiCallFinishedPageController()),
     ),
   ];
 }
