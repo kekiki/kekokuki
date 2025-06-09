@@ -82,36 +82,44 @@ class Assets {
   /// assets/images/common/kekokuki_video_play.png
   static const String imagesCommonKekokukiVideoPlay = "assets/images/common/kekokuki_video_play.png";
 
-  /// Assets for imagesTabsKekokukiTab1Normal
-  /// assets/images/tabs/kekokuki_tab1_normal.webp
-  static const String imagesTabsKekokukiTab1Normal = "assets/images/tabs/kekokuki_tab1_normal.webp";
+  /// Assets for imagesTabsKekokukiTabAnchorN
+  /// assets/images/tabs/kekokuki_tab_anchor_n.webp
+  static const String imagesTabsKekokukiTabAnchorN = "assets/images/tabs/kekokuki_tab_anchor_n.webp";
 
-  /// Assets for imagesTabsKekokukiTab1Selected
-  /// assets/images/tabs/kekokuki_tab1_selected.webp
-  static const String imagesTabsKekokukiTab1Selected = "assets/images/tabs/kekokuki_tab1_selected.webp";
+  /// Assets for imagesTabsKekokukiTabAnchorS
+  /// assets/images/tabs/kekokuki_tab_anchor_s.webp
+  static const String imagesTabsKekokukiTabAnchorS = "assets/images/tabs/kekokuki_tab_anchor_s.webp";
 
-  /// Assets for imagesTabsKekokukiTab2Normal
-  /// assets/images/tabs/kekokuki_tab2_normal.webp
-  static const String imagesTabsKekokukiTab2Normal = "assets/images/tabs/kekokuki_tab2_normal.webp";
+  /// Assets for imagesTabsKekokukiTabChatN
+  /// assets/images/tabs/kekokuki_tab_chat_n.webp
+  static const String imagesTabsKekokukiTabChatN = "assets/images/tabs/kekokuki_tab_chat_n.webp";
 
-  /// Assets for imagesTabsKekokukiTab2Selected
-  /// assets/images/tabs/kekokuki_tab2_selected.webp
-  static const String imagesTabsKekokukiTab2Selected = "assets/images/tabs/kekokuki_tab2_selected.webp";
+  /// Assets for imagesTabsKekokukiTabChatS
+  /// assets/images/tabs/kekokuki_tab_chat_s.webp
+  static const String imagesTabsKekokukiTabChatS = "assets/images/tabs/kekokuki_tab_chat_s.webp";
 
-  /// Assets for imagesTabsKekokukiTab3Normal
-  /// assets/images/tabs/kekokuki_tab3_normal.webp
-  static const String imagesTabsKekokukiTab3Normal = "assets/images/tabs/kekokuki_tab3_normal.webp";
+  /// Assets for imagesTabsKekokukiTabMatchN
+  /// assets/images/tabs/kekokuki_tab_match_n.webp
+  static const String imagesTabsKekokukiTabMatchN = "assets/images/tabs/kekokuki_tab_match_n.webp";
 
-  /// Assets for imagesTabsKekokukiTab3Selected
-  /// assets/images/tabs/kekokuki_tab3_selected.webp
-  static const String imagesTabsKekokukiTab3Selected = "assets/images/tabs/kekokuki_tab3_selected.webp";
+  /// Assets for imagesTabsKekokukiTabMatchS
+  /// assets/images/tabs/kekokuki_tab_match_s.webp
+  static const String imagesTabsKekokukiTabMatchS = "assets/images/tabs/kekokuki_tab_match_s.webp";
 
-  /// Assets for imagesTabsKekokukiTab4Normal
-  /// assets/images/tabs/kekokuki_tab4_normal.webp
-  static const String imagesTabsKekokukiTab4Normal = "assets/images/tabs/kekokuki_tab4_normal.webp";
+  /// Assets for imagesTabsKekokukiTabMineN
+  /// assets/images/tabs/kekokuki_tab_mine_n.webp
+  static const String imagesTabsKekokukiTabMineN = "assets/images/tabs/kekokuki_tab_mine_n.webp";
 
-  /// Assets for imagesTabsKekokukiTab4Selected
-  /// assets/images/tabs/kekokuki_tab4_selected.webp
-  static const String imagesTabsKekokukiTab4Selected = "assets/images/tabs/kekokuki_tab4_selected.webp";
+  /// Assets for imagesTabsKekokukiTabMineS
+  /// assets/images/tabs/kekokuki_tab_mine_s.webp
+  static const String imagesTabsKekokukiTabMineS = "assets/images/tabs/kekokuki_tab_mine_s.webp";
+
+  /// Assets for imagesTabsKekokukiTabMomentN
+  /// assets/images/tabs/kekokuki_tab_moment_n.webp
+  static const String imagesTabsKekokukiTabMomentN = "assets/images/tabs/kekokuki_tab_moment_n.webp";
+
+  /// Assets for imagesTabsKekokukiTabMomentS
+  /// assets/images/tabs/kekokuki_tab_moment_s.webp
+  static const String imagesTabsKekokukiTabMomentS = "assets/images/tabs/kekokuki_tab_moment_s.webp";
 }
 

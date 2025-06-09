@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 
@@ -139,16 +138,23 @@ class KekokukiRtcService extends GetxService {
         await _engine?.switchCamera();
         _isCameraFront = true;
       }
-      return;
+    } else {
+      _isCameraFront = !_isCameraFront;
+      await _engine?.switchCamera();
     }
-
-    _isCameraFront = !_isCameraFront;
-    _engine?.switchCamera();
   }
 
-  Future<Widget?> startPreview([bool useFrontCamera = true]) async {
+  AgoraVideoView createLocalVideoWidget() {
+    return AgoraVideoView(controller: VideoViewController(rtcEngine: _engine!, canvas: const VideoCanvas(uid: 0)));
+  }
+
+  AgoraVideoView createRemoteVideoWidget(int anchorId, String channelId) {
+    return AgoraVideoView(controller: VideoViewController.remote(rtcEngine: _engine!, canvas: VideoCanvas(uid: anchorId), connection: RtcConnection(channelId: channelId)));
+  }
+
+  Future<void> startPreview() async {
     await _engine?.enableVideo();
-    if (useFrontCamera) await switchCamera(reset: true);
+    await switchCamera(reset: true);
     await _engine?.startPreview();
     await _engine?.setBeautyEffectOptions(
       enabled: true,
@@ -164,16 +170,11 @@ class KekokukiRtcService extends GetxService {
         // sharpnessLevel: 1.0, // 锐化晰度
       ),
     );
-    return AgoraVideoView(controller: VideoViewController(rtcEngine: _engine!, canvas: const VideoCanvas(uid: 0)));
   }
 
   Future<void> stopPreview() async {
     await _engine?.stopPreview();
     await _engine?.disableVideo();
-  }
-
-  Future<Widget?> startPlayStream(int anchorId, String channelId) async {
-    return AgoraVideoView(controller: VideoViewController.remote(rtcEngine: _engine!, canvas: VideoCanvas(uid: anchorId), connection: RtcConnection(channelId: channelId)));
   }
 
   void muteRemoteVideoStream(int anchorId, bool mute) {
@@ -184,11 +185,11 @@ class KekokukiRtcService extends GetxService {
     _engine?.muteRemoteAudioStream(uid: anchorId, mute: mute);
   }
 
-  void mutePublishStreamVideo(bool mute) {
+  void muteLocalVideoStream(bool mute) {
     _engine?.muteLocalVideoStream(mute);
   }
 
-  void mutePublishStreamAudio(bool mute) {
+  void muteLocalAudioStream(bool mute) {
     _engine?.muteLocalAudioStream(mute);
   }
 

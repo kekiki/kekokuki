@@ -49,15 +49,15 @@ class KekokukiCallingVideoWidget extends StatelessWidget {
                 onPressed: _controller.onTapSwitchCamera,
                 icon: const Icon(Icons.camera, size: 30),
               ),
-              Obx(() {
-                final isStartCamera = state.isStartCameraObs.value;
-                final icon = isStartCamera ? const Icon(Icons.camera, size: 30) : const Icon(Icons.close, size: 30);
-                return IconButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: _controller.onTapCamera,
-                  icon: icon,
-                );
-              }),
+              // Obx(() {
+              //   final isStartCamera = state.isStartCameraObs.value;
+              //   final icon = isStartCamera ? const Icon(Icons.camera, size: 30) : const Icon(Icons.close, size: 30);
+              //   return IconButton(
+              //     padding: EdgeInsets.zero,
+              //     onPressed: _controller.onTapCamera,
+              //     icon: icon,
+              //   );
+              // }),
               Obx(() {
                 final isVoiceEnable = state.isVoiceEnableObs.value;
                 final icon = isVoiceEnable ? const Icon(Icons.phone_enabled, size: 30) : const Icon(Icons.phone_disabled, size: 30);

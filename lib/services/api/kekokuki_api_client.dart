@@ -155,4 +155,10 @@ abstract class KekokukiApiClient {
     @Field('endType') int endType,
     @Field('matchMode') int? matchMode,
   );
+
+  // /call/call/refreshCall/$channelId
+  @POST('/call/call/refreshCall/')
+  Future<KekokukiApiResponse<String>> refreshCall(
+    @Field('join_path') String path,
+  );
 }

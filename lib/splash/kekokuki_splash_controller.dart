@@ -1,14 +1,17 @@
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 
 import '../pages/login/kekokuki_login_service.dart';
+import '../services/routes/kekokuki_routes.dart';
 
 class KekokukiSplashController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-
     final loginService = Get.find<KekokukiLoginService>();
-    loginService.login().then((_) => FlutterNativeSplash.remove());
+    if (loginService.isLogin) {
+      Get.offAllNamed(KekokukiRoutes.home);
+    } else {
+      Get.offAllNamed(KekokukiRoutes.login);
+    }
   }
 }

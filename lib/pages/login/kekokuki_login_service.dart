@@ -30,6 +30,9 @@ class KekokukiLoginService extends GetxService with WidgetsBindingObserver {
   String get authorization => _loginInfo.authorization;
   bool get isLogin => authorization.isNotEmpty;
 
+  bool _isInitServices = false;
+  bool get isInitServices => _isInitServices;
+
   Future<KekokukiLoginService> init() async {
     _loginInfo = await _queryLoginInfo();
     _loginRecord = await _queryLoginRecord();
@@ -69,6 +72,53 @@ class KekokukiLoginService extends GetxService with WidgetsBindingObserver {
     }
   }
 
+  Future<void> initServices() async {
+    await Get.putAsync(() => KekokukiRtmService().init());
+    await Get.putAsync(() => KekokukiRtcService().init());
+    await Get.putAsync(() => KekokukiCallService().init());
+    await Get.putAsync(() => KekokukiChatService().init());
+    await Get.find<KekokukiConfigService>().fetchConfig();
+    await Get.find<KekokukiProfileService>().fetchProfile();
+    _isInitServices = true;
+  }
+
+  Future<void> _deleteServices() async {
+    await Get.delete<KekokukiChatService>(force: true);
+    await Get.delete<KekokukiCallService>(force: true);
+    await Get.delete<KekokukiRtcService>(force: true);
+    await Get.delete<KekokukiRtmService>(force: true);
+    _isInitServices = false;
+  }
+
+  Future<void> _login(KekokukiLoginInfoModel loginInfo, KekokukiLoginRecordModel loginRecord) async {
+    try {
+      await _saveLoginInfo(loginInfo);
+      await _saveLoginRecord(loginRecord);
+      await initServices();
+    } catch (e, s) {
+      KekokukiLogUtil.e('LoginService', 'login error: $e', s);
+    } finally {
+      Get.offAllNamed(KekokukiRoutes.home);
+    }
+  }
+
+  Future<void> logout() async {
+    if (!isLogin) return;
+    try {
+      await _deleteServices();
+      _loginInfo = const KekokukiLoginInfoModel();
+    } catch (e, s) {
+      KekokukiLogUtil.e('LoginService', 'logout error: $e', s);
+    } finally {
+      Get.offAllNamed(KekokukiRoutes.login);
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    await _clearLoginInfo();
+    await logout();
+  }
+
   Future<void> _saveLoginInfo(KekokukiLoginInfoModel model) async {
     if (model.userId != _loginInfo.userId) {
       await _clearLoginInfo();
@@ -78,9 +128,9 @@ class KekokukiLoginService extends GetxService with WidgetsBindingObserver {
   }
 
   Future<void> _clearLoginInfo() async {
-    // TODO: 同时清空旧账号数据
     // 数据库清空
     await _clearDatabase();
+    // 用户状态数据清空
     await KekokukiAppPreference.user.clear();
   }
 
@@ -124,18 +174,18 @@ class KekokukiLoginService extends GetxService with WidgetsBindingObserver {
     password = KekokukiStringExt.generateRandomString(6);
     KekokukiLoadingUtil.show();
     final result = await _apiClient.loginWithGuest(password).response;
-    KekokukiLoadingUtil.dismiss();
 
     if (result.isSuccess && result.data != null) {
       final loginInfo = result.data!;
-      await _saveLoginInfo(loginInfo);
-      await _saveLoginRecord(KekokukiLoginRecordModel(
+      final loginRecord = KekokukiLoginRecordModel(
         type: KekokukiLoginType.fast,
         account: loginInfo.userId.toString(),
         password: password,
-      ));
-      login();
+      );
+      _login(loginInfo, loginRecord);
+      KekokukiLoadingUtil.dismiss();
     } else {
+      KekokukiLoadingUtil.dismiss();
       KekokukiLoadingUtil.showToast(result.msg.isNotEmpty ? result.msg : 'kekokuki_login_failed'.tr);
     }
   }
@@ -148,13 +198,13 @@ class KekokukiLoginService extends GetxService with WidgetsBindingObserver {
 
     if (result.isSuccess && result.data != null) {
       final loginInfo = result.data!;
-      await _saveLoginInfo(loginInfo);
-      await _saveLoginRecord(KekokukiLoginRecordModel(
+      final loginRecord = KekokukiLoginRecordModel(
         type: KekokukiLoginType.password,
         account: loginInfo.username,
         password: password,
-      ));
-      login();
+      );
+      _login(loginInfo, loginRecord);
+      KekokukiLoadingUtil.dismiss();
     } else {
       KekokukiLoadingUtil.showToast(result.msg.isNotEmpty ? result.msg : 'kekokuki_login_failed'.tr);
     }
@@ -205,33 +255,5 @@ class KekokukiLoginService extends GetxService with WidgetsBindingObserver {
     //   throw Exception(result.msg.isNotEmpty ? result.msg : 'kekokuki_login_failed'.tr);
     // }
     KekokukiLoadingUtil.showToast('Google login is not supported yet');
-  }
-
-  Future<void> login() async {
-    if (!isLogin) return Get.offAllNamed(KekokukiRoutes.login);
-    await Get.putAsync(() => KekokukiConfigService().init());
-    await Get.putAsync(() => KekokukiProfileService().init());
-    await Get.putAsync(() => KekokukiRtmService().init());
-    await Get.putAsync(() => KekokukiRtcService().init());
-    await Get.putAsync(() => KekokukiCallService().init());
-    await Get.putAsync(() => KekokukiChatService().init());
-    Get.offAllNamed(KekokukiRoutes.home);
-  }
-
-  Future<void> logout() async {
-    if (!isLogin) return;
-    await Get.delete<KekokukiChatService>(force: true);
-    await Get.delete<KekokukiCallService>(force: true);
-    await Get.delete<KekokukiRtcService>(force: true);
-    await Get.delete<KekokukiRtmService>(force: true);
-    await Get.delete<KekokukiProfileService>(force: true);
-    await Get.delete<KekokukiConfigService>(force: true);
-    _loginInfo = const KekokukiLoginInfoModel();
-    Get.offAllNamed(KekokukiRoutes.login);
-  }
-
-  Future<void> deleteAccount() async {
-    await _clearLoginInfo();
-    await logout();
   }
 }

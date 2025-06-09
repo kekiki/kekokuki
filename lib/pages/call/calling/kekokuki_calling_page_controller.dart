@@ -3,12 +3,14 @@ import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:kekokuki/services/api/kekokuki_api_response_ext.dart';
 import 'package:kekokuki/services/rtm&rtc/kekokuki_rtc_service.dart';
 import 'package:wakelock/wakelock.dart';
 
 import '../../../common/utils/kekokuki_format_util.dart';
 import '../../../common/utils/kekokuki_loading_util.dart';
 import '../../../common/utils/kekokuki_log_util.dart';
+import '../../../services/api/kekokuki_api_client.dart';
 import '../../../services/profile/kekokuki_profile_mixin.dart';
 import '../../../services/routes/kekokuki_routes.dart';
 import '../../widgets/dialogs/kekokuki_confirm_dialog.dart';
@@ -22,13 +24,11 @@ class KekokukiCallingPageController extends GetxController with KekokukiProfileM
 
   final _tag = 'Video Calling';
 
+  final _apiClient = Get.find<KekokukiApiClient>();
   final _rtcService = Get.find<KekokukiRtcService>();
 
   Timer? _callingTimer;
-  int _callingSeconds = 1;
-
-  bool isCallEnd = false;
-  bool isExitRoom = false;
+  int _callingSeconds = 0;
 
   Widget? _localPreviewWidget;
   Widget? _remotePreviewWidget;
@@ -39,15 +39,12 @@ class KekokukiCallingPageController extends GetxController with KekokukiProfileM
   final StreamController<Widget> _fullScreenWidgetStreamController = StreamController();
 
   Stream<Widget> get smallScreenWidgetStream => _smallScreenWidgetStreamController.stream;
-
   Stream<Widget> get fullScreenWidgetStream => _fullScreenWidgetStreamController.stream;
 
   StreamController<Widget> get _localController => state.isLocalSmallPreview ? _smallScreenWidgetStreamController : _fullScreenWidgetStreamController;
-
   StreamController<Widget> get _remoteController => state.isLocalSmallPreview ? _fullScreenWidgetStreamController : _smallScreenWidgetStreamController;
 
   Widget get initFullScreenPlaceholder => KekokukiCallingPlaceholder(avatar: state.callModel.anchor.portrait, fullScreen: true, isSelf: false);
-
   Widget get initSmallScreenPlaceholder => KekokukiCallingPlaceholder(avatar: state.profileObs.value.portrait, fullScreen: false, isSelf: true);
 
   @override
@@ -57,7 +54,6 @@ class KekokukiCallingPageController extends GetxController with KekokukiProfileM
 
     Wakelock.enable();
     _startCallingTimer();
-    _startPushStream();
     addProfileChangedListener(state.profileObs.call);
   }
 
@@ -66,16 +62,17 @@ class KekokukiCallingPageController extends GetxController with KekokukiProfileM
     super.onReady();
     _rtcService.listen(
       anchorId: state.callModel.anchor.id,
-      onAnchorOffline: () {
-        _onRemoteUserLeave();
-      },
+      onAnchorOffline: _onAnchorOffline,
+      onDisconnected: _onDisconnected,
+      onTokenWillExpire: _onTokenWillExpire,
     );
+    _setupVideoStream();
   }
 
   @override
   void onClose() {
     removeProfileChangedListener();
-    _callingTimer?.cancel();
+    _stopCallingTimer();
     _smallScreenWidgetStreamController.close();
     _fullScreenWidgetStreamController.close();
     _localPreviewWidget = null;
@@ -85,7 +82,6 @@ class KekokukiCallingPageController extends GetxController with KekokukiProfileM
   }
 
   void _startCallingTimer() {
-    if (state.callModel.callType == KekokukiCallType.aiv) return;
     KekokukiLogUtil.d(_tag, "_startCallingTimer");
     _callingTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       state.callingDurationObs.value = KekokukiFormatUtil.durationToTime(
@@ -93,41 +89,41 @@ class KekokukiCallingPageController extends GetxController with KekokukiProfileM
         isShowHour: false,
       );
       _callingSeconds += 1;
+      if (_callingSeconds % 60 == 0) {
+        // 每60秒续订一次token，服务器有计费逻辑
+        _renewRtcToken();
+      }
     });
   }
 
-  Future<void> _startPushStream() async {
-    await _rtcService.setupVideoConfig();
-
-    final localWidget = await _rtcService.startPreview();
-    if (localWidget != null) {
-      _smallScreenWidgetStreamController.add(localWidget);
-      _localPreviewWidget = localWidget;
-    }
-
-    final remoteWidget = await _rtcService.startPlayStream(state.callModel.anchor.id, state.callModel.channelModel!.channelId.toString());
-    if (remoteWidget != null) {
-      _fullScreenWidgetStreamController.add(remoteWidget);
-      _remotePreviewWidget = remoteWidget;
-      _isRemoteCameraEnable = true;
-    }
+  void _stopCallingTimer() {
+    _callingTimer?.cancel();
+    _callingTimer = null;
   }
 
-  // void _onStreamAdd(String streamId) async {
-  //   final remoteWidget = await _rtcService.startPlayStream(state.callModel.anchor.id, state.callModel.channelModel!.channelId.toString());
-  //   if (remoteWidget != null) {
-  //     _fullScreenWidgetStreamController.add(remoteWidget);
-  //     _remotePreviewWidget = remoteWidget;
-  //     _isRemoteCameraEnable = true;
-  //   }
-  // }
+  Future<void> _setupVideoStream() async {
+    await _rtcService.setupVideoConfig();
+    await _rtcService.startPreview();
 
-  void _onFinishCall(String reason) {
-    KekokukiLogUtil.i(_tag, "_onFinishCall $reason");
-    if (isExitRoom) return;
-    isExitRoom = true;
+    final localWidget = _rtcService.createLocalVideoWidget();
+    _smallScreenWidgetStreamController.add(localWidget);
+    _localPreviewWidget = localWidget;
 
-    _rtcService.release();
+    final anchorId = state.callModel.anchor.id;
+    final channelId = state.callModel.channelModel!.channelId.toString();
+    final remoteWidget = _rtcService.createRemoteVideoWidget(anchorId, channelId);
+    _fullScreenWidgetStreamController.add(remoteWidget);
+    _remotePreviewWidget = remoteWidget;
+    _isRemoteCameraEnable = true;
+  }
+
+  bool _isCallFinished = false;
+  Future<void> _onFinishCall(String reason) async {
+    KekokukiLogUtil.i(_tag, "_onFinishCall: $reason");
+    if (_isCallFinished) return;
+    _isCallFinished = true;
+
+    await _rtcService.release();
   }
 
   // void _onSettlementCall(KekokukiCallSettlementModel data) {
@@ -146,38 +142,55 @@ class KekokukiCallingPageController extends GetxController with KekokukiProfileM
   //   );
   // }
 
+  bool _isExit = false;
   Future<void> _forceToExit() async {
     KekokukiLogUtil.i(_tag, "_forceToExit");
-    if (isCallEnd) return;
-    isCallEnd = true;
+    if (_isExit) return;
+    _isExit = true;
 
     await _rtcService.release();
     Get.until((route) => route.settings.name == KekokukiRoutes.callCalling);
     Get.back();
   }
 
-  void _onRemoteUserLeave() {
+  Future<void> _onAnchorOffline() async {
     KekokukiLogUtil.w(_tag, "_onRemoteUserLeave");
-    _rtcService.release();
-    // final roomId = state.callModel.sessionId;
-    // KekokukiCallEngineManager.instance.exitRoom(roomId);
+    await _rtcService.release();
   }
 
-  void _onRemoteCameraStateUpdate(bool enable) {
-    _isRemoteCameraEnable = enable;
-    if (enable) {
-      final remoteWidget = _remotePreviewWidget;
-      if (remoteWidget == null) return;
-      _remoteController.add(remoteWidget);
-    } else {
-      final isRemoteFullPreview = state.isLocalSmallPreviewObs.value;
-      final widget = KekokukiCallingPlaceholder(
-        avatar: state.callModel.anchor.portrait,
-        fullScreen: isRemoteFullPreview,
-      );
-      _remoteController.add(widget);
+  Future<void> _onDisconnected() async {
+    KekokukiLogUtil.w(_tag, "_onDisconnected");
+    await _rtcService.release();
+  }
+
+  Future<void> _onTokenWillExpire() async {
+    KekokukiLogUtil.w(_tag, "_onTokenWillExpire");
+    await _renewRtcToken();
+  }
+
+  Future<void> _renewRtcToken() async {
+    final channelId = state.callModel.channelModel?.channelId ?? 0;
+    final response = await _apiClient.refreshCall('$channelId').response;
+    if (response.isSuccess && response.data != null) {
+      _rtcService.renewToken(response.data!);
     }
   }
+
+  // void _onRemoteCameraStateUpdate(bool enable) {
+  //   _isRemoteCameraEnable = enable;
+  //   if (enable) {
+  //     final remoteWidget = _remotePreviewWidget;
+  //     if (remoteWidget == null) return;
+  //     _remoteController.add(remoteWidget);
+  //   } else {
+  //     final isRemoteFullPreview = state.isLocalSmallPreviewObs.value;
+  //     final widget = KekokukiCallingPlaceholder(
+  //       avatar: state.callModel.anchor.portrait,
+  //       fullScreen: isRemoteFullPreview,
+  //     );
+  //     _remoteController.add(widget);
+  //   }
+  // }
 
   void _AivCallHangup(int playDuration) async {
     // KekokukiLoadingUtil.show();
@@ -202,11 +215,12 @@ class KekokukiCallingPageController extends GetxController with KekokukiProfileM
   }
 
   void onAivPlayProgress(int position) {
-    _callingSeconds = position;
-    state.callingDurationObs.value = KekokukiFormatUtil.durationToTime(
-      _callingSeconds,
-      isShowHour: false,
-    );
+    // _callingSeconds = position;
+    // state.callingDurationObs.value = KekokukiFormatUtil.durationToTime(
+    //   _callingSeconds,
+    //   isShowHour: false,
+    // );
+    KekokukiLogUtil.i(_tag, 'Aiv play position: $position');
   }
 
   void onAivPlayEnd(int duration) {
@@ -223,10 +237,10 @@ class KekokukiCallingPageController extends GetxController with KekokukiProfileM
   }
 
   void onTapClose() async {
-    final confirm = await KekokukiDialogUtil.showDialog(
+    bool? confirm = await KekokukiDialogUtil.showDialog(
       KekokukiConfirmDialog(content: 'kekokuki_call_hangup_tips'.tr),
     );
-    if (confirm) {
+    if (confirm == true) {
       if (state.callModel.callType == KekokukiCallType.aiv) {
         _onFinishCall('DialogExit');
         _AivCallHangup(_callingSeconds);
@@ -255,27 +269,28 @@ class KekokukiCallingPageController extends GetxController with KekokukiProfileM
     _rtcService.switchCamera();
   }
 
-  void onTapCamera() async {
-    KekokukiLogUtil.i(_tag, "onTapCamera");
-    final isStarCamera = !state.isStartCameraObs.value;
-    if (isStarCamera) {
-      _localPreviewWidget = await _rtcService.startPreview();
-      _rtcService.mutePublishStreamVideo(false);
-    } else {
-      await _rtcService.stopPreview();
-      _rtcService.mutePublishStreamVideo(true);
-      _localPreviewWidget = KekokukiCallingPlaceholder(
-        avatar: state.profileObs.value.portrait,
-        isSelf: true,
-        fullScreen: !state.isLocalSmallPreview,
-      );
-    }
-    final localWidget = _localPreviewWidget;
-    if (localWidget != null) {
-      _localController.add(localWidget);
-    }
-    state.isStartCameraObs.value = isStarCamera;
-  }
+  // void onTapCamera() async {
+  //   KekokukiLogUtil.i(_tag, "onTapCamera");
+  //   final isStarCamera = !state.isStartCameraObs.value;
+  //   if (isStarCamera) {
+  //     await _rtcService.startPreview();
+  //     _localPreviewWidget = _rtcService.createLocalVideoWidget();
+  //     _rtcService.mutePublishStreamVideo(false);
+  //   } else {
+  //     await _rtcService.stopPreview();
+  //     _rtcService.mutePublishStreamVideo(true);
+  //     _localPreviewWidget = KekokukiCallingPlaceholder(
+  //       avatar: state.profileObs.value.portrait,
+  //       isSelf: true,
+  //       fullScreen: !state.isLocalSmallPreview,
+  //     );
+  //   }
+  //   final localWidget = _localPreviewWidget;
+  //   if (localWidget != null) {
+  //     _localController.add(localWidget);
+  //   }
+  //   state.isStartCameraObs.value = isStarCamera;
+  // }
 
   void onTapVoice() async {
     KekokukiLogUtil.i(_tag, "onTapVoice");

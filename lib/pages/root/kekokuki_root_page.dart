@@ -23,24 +23,23 @@ class KekokukiRootPage extends GetView<KekokukiRootController> {
 
   @override
   Widget build(BuildContext context) {
-    final state = controller.state;
     return KekokukiAppScaffold(
       isAllowBack: false,
       onBackPressed: controller.onBack,
-      body: Obx(() {
-        return IndexedStack(
-          sizing: StackFit.expand,
-          index: state.selectedTabTypeObs.value.index,
-          children: homePages,
-        );
-      }),
-      bottomNavigationBar: Obx(() {
-        return KekokukiRootNavigationBar(
-          selectedType: state.selectedTabTypeObs.value,
-          messageCount: state.unReadMessageCountObs.value,
-          onTapTab: controller.onTapTabItem,
-        );
-      }),
+      body: GetBuilder<KekokukiRootController>(
+        id: kBuildIdPages,
+        builder: (controller) {
+          return IndexedStack(
+            sizing: StackFit.expand,
+            index: controller.selectedTab.index,
+            children: homePages,
+          );
+        },
+      ),
+      bottomNavigationBar: GetBuilder<KekokukiRootController>(
+        id: kBuildIdBottomBar,
+        builder: (controller) => KekokukiRootNavigationBar(controller),
+      ),
     );
   }
 }
