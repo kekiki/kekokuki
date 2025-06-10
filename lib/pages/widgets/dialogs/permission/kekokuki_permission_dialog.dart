@@ -82,7 +82,7 @@ class KekokukiPermissionDialog extends StatelessWidget {
                       width: 260.pt,
                       height: 44.pt,
                       borderRadius: 22.pt,
-                      backgroundColor: KekokukiColors.buttonNormalColor,
+                      backgroundColor: Colors.black12,
                       child: Text(
                         permissionList.length == 1 ? 'kekokuki_allow'.tr : 'kekokuki_allow_all'.tr,
                         style: KekokukiStyles.s16w700.copyWith(

@@ -51,7 +51,7 @@ class KekokukiLoginPage extends GetView<KekokukiLoginController> {
               width: 345.pt,
               height: 50.pt,
               decoration: BoxDecoration(
-                color: KekokukiColors.cardColor,
+                color: Colors.black12,
                 borderRadius: BorderRadius.circular(25.pt),
               ),
               child: Row(
@@ -75,7 +75,7 @@ class KekokukiLoginPage extends GetView<KekokukiLoginController> {
               width: 345.pt,
               height: 50.pt,
               decoration: BoxDecoration(
-                color: KekokukiColors.cardColor,
+                color: Colors.black12,
                 borderRadius: BorderRadius.circular(25.pt),
               ),
               child: Row(
@@ -101,7 +101,7 @@ class KekokukiLoginPage extends GetView<KekokukiLoginController> {
                 width: 345.pt,
                 height: 50.pt,
                 decoration: BoxDecoration(
-                  color: KekokukiColors.cardColor,
+                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(25.pt),
                 ),
                 child: Row(
@@ -155,7 +155,7 @@ class KekokukiLoginPage extends GetView<KekokukiLoginController> {
                       TextSpan(
                         text: '${'kekokuki_login_accept'.tr} ',
                         style: TextStyle(
-                          color: KekokukiColors.grayTextColor,
+                          color: Colors.black45,
                           fontSize: 14.pt,
                           fontWeight: FontWeight.w400,
                           height: 1.2,

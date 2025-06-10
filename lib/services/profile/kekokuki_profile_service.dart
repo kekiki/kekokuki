@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../common/utils/kekokuki_log_util.dart';
 import '../api/kekokuki_api_client.dart';
+import '../config/kekokuki_global_state.dart';
 import './../api/kekokuki_api_response_ext.dart';
 import '../preference/kekokuki_app_preference.dart';
 import './kekokuki_profile_model.dart';
@@ -41,6 +42,7 @@ class KekokukiProfileService extends GetxService {
   }
 
   Future<void> _writeProfileModel(KekokukiProfileModel model) async {
+    KekokukiGlobalState.isSpecialMode = model.rflag == 1;
     _profileModel = model;
     _streamController.add(model);
     KekokukiAppPreference.user.profileModelJson = model.toJson();

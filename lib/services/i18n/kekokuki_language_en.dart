@@ -17,8 +17,6 @@ extension KekokukiLanguageEnglish on KekokukiLocalTranslations {
         'kekokuki_online': 'Online',
         'kekokuki_busy': 'Busy',
         'kekokuki_offline': 'Offline',
-
-        'kekokuki_no_data': 'No Data',
         'kekokuki_no_network': 'Network is unavailable',
 
         // permission
@@ -32,6 +30,9 @@ extension KekokukiLanguageEnglish on KekokukiLocalTranslations {
 
         'kekokuki_allow': 'Allow',
         'kekokuki_allow_all': 'Allow all',
+
+        // root
+        'kekokuki_exit_app_tips': 'Are you sure you want to quit the App?',
 
         //home
         'kekokuki_discover': 'Discover',
@@ -83,6 +84,8 @@ extension KekokukiLanguageEnglish on KekokukiLocalTranslations {
         "kekokuki_message_call_missed": "Missed", // 未接
 
         // Button
+        'kekokuki_reload': 'Reload',
+
         'kekokuki_send': 'Send',
         'kekokuki_confirm': 'Confirm',
         'kekokuki_cancel': 'Cancel',

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kekokuki/generated/assets.dart';
-import 'package:kekokuki/services/styles/kekokuki_colors.dart';
 
 import '../../common/adapts/kekokuki_screen_adapt.dart';
 import '../../services/styles/kekokuki_styles.dart';
@@ -46,7 +45,7 @@ class KekokukiRootNavigationBar extends StatelessWidget {
               return _ItemTab(
                 iconNormal: Assets.imagesTabsKekokukiTabChatN,
                 iconSelected: Assets.imagesTabsKekokukiTabChatS,
-                count: _controller.unReadMessageNum,
+                count: _controller.dataStatus.isSuccess ? _controller.unReadMessageNum : 0,
                 isSelected: _controller.selectedTab == KekokukiRootTab.chat,
                 onTap: () => _controller.onTapTab(KekokukiRootTab.chat),
               );
@@ -83,9 +82,10 @@ class _ItemTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final String icon = isSelected ? iconSelected : iconNormal;
     final unreadText = count <= 99 ? count.toString() : "99+";
-    return SizedBox(
+    return Container(
       width: 40.pt,
       height: 40.pt,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.pt)),
       child: Stack(
         children: [
           Positioned.fill(
@@ -107,7 +107,7 @@ class _ItemTab extends StatelessWidget {
                 alignment: Alignment.center,
                 padding: EdgeInsets.symmetric(horizontal: 4.5.pt),
                 decoration: BoxDecoration(
-                  color: KekokukiColors.accentColor,
+                  color: Colors.red,
                   borderRadius: BorderRadius.circular(8.pt),
                   border: Border.all(color: Colors.white),
                 ),

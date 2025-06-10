@@ -22,9 +22,29 @@ class Assets {
   /// assets/audios/kekokuki_call_audio.mp3
   static const String audiosKekokukiCallAudio = "assets/audios/kekokuki_call_audio.mp3";
 
-  /// Assets for fontsKekokukiCascadiaCode
-  /// assets/fonts/kekokuki_cascadia_code.ttf
-  static const String fontsKekokukiCascadiaCode = "assets/fonts/kekokuki_cascadia_code.ttf";
+  /// Assets for fontsMulishMulishBold
+  /// assets/fonts/mulish/Mulish-Bold.ttf
+  static const String fontsMulishMulishBold = "assets/fonts/mulish/Mulish-Bold.ttf";
+
+  /// Assets for fontsMulishMulishLight
+  /// assets/fonts/mulish/Mulish-Light.ttf
+  static const String fontsMulishMulishLight = "assets/fonts/mulish/Mulish-Light.ttf";
+
+  /// Assets for fontsMulishMulishMedium
+  /// assets/fonts/mulish/Mulish-Medium.ttf
+  static const String fontsMulishMulishMedium = "assets/fonts/mulish/Mulish-Medium.ttf";
+
+  /// Assets for fontsMulishMulishRegular
+  /// assets/fonts/mulish/Mulish-Regular.ttf
+  static const String fontsMulishMulishRegular = "assets/fonts/mulish/Mulish-Regular.ttf";
+
+  /// Assets for fontsMulishMulishSemiBold
+  /// assets/fonts/mulish/Mulish-SemiBold.ttf
+  static const String fontsMulishMulishSemiBold = "assets/fonts/mulish/Mulish-SemiBold.ttf";
+
+  /// Assets for fontsMulishOFL
+  /// assets/fonts/mulish/OFL.txt
+  static const String fontsMulishOFL = "assets/fonts/mulish/OFL.txt";
 
   /// Assets for imagesCommonKekokukiAvatarAnchor
   /// assets/images/common/kekokuki_avatar_anchor.webp
@@ -73,6 +93,22 @@ class Assets {
   /// Assets for imagesCommonKekokukiPermissionStorage
   /// assets/images/common/kekokuki_permission_storage.webp
   static const String imagesCommonKekokukiPermissionStorage = "assets/images/common/kekokuki_permission_storage.webp";
+
+  /// Assets for imagesCommonKekokukiStatusEmpty
+  /// assets/images/common/kekokuki_status_empty.webp
+  static const String imagesCommonKekokukiStatusEmpty = "assets/images/common/kekokuki_status_empty.webp";
+
+  /// Assets for imagesCommonKekokukiStatusEmptyGift
+  /// assets/images/common/kekokuki_status_empty_gift.webp
+  static const String imagesCommonKekokukiStatusEmptyGift = "assets/images/common/kekokuki_status_empty_gift.webp";
+
+  /// Assets for imagesCommonKekokukiStatusEmptyPerson
+  /// assets/images/common/kekokuki_status_empty_person.webp
+  static const String imagesCommonKekokukiStatusEmptyPerson = "assets/images/common/kekokuki_status_empty_person.webp";
+
+  /// Assets for imagesCommonKekokukiStatusError
+  /// assets/images/common/kekokuki_status_error.webp
+  static const String imagesCommonKekokukiStatusError = "assets/images/common/kekokuki_status_error.webp";
 
   /// Assets for imagesCommonKekokukiVideoPause
   /// assets/images/common/kekokuki_video_pause.png

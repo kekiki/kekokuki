@@ -8,8 +8,11 @@ import 'package:kekokuki/pages/call/services/kekokuki_call_service.dart';
 
 import '../../common/widgets/kekokuki_app_bar.dart';
 import '../../common/widgets/kekokuki_app_scaffold.dart';
+import '../../services/styles/kekokuki_colors.dart';
 import '../../services/styles/kekokuki_styles.dart';
 import '../call/services/kekokuki_call_model.dart';
+import '../widgets/tabbars/kekokuki_bottom_line_indicator.dart';
+import '../widgets/tabbars/kekokuki_primary_tabbar.dart';
 import 'anchor_detail/kekokuk_anchor_model.dart';
 import 'kekokuki_explore_page_controller.dart';
 
@@ -19,41 +22,69 @@ class KekokukiExplorePage extends GetView<KekokukiExplorePageController> {
   @override
   Widget build(BuildContext context) {
     return KekokukiAppScaffold(
-      appBar: KekokukiAppBar(
-        title: Text(
-          "Explore".tr,
-          style: KekokukiStyles.s18w700,
+      // appBar: KekokukiAppBar(
+      //   title: Text(
+      //     "Explore".tr,
+      //     style: KekokukiStyles.s18w700,
+      //   ),
+      // ),
+      // body: PagingListener(
+      //   controller: controller.pagingController,
+      //   builder: (context, state, fetchNextPage) {
+      //     return PagedGridView(
+      //       padding: EdgeInsets.symmetric(horizontal: 12.pt),
+      //       state: state,
+      //       fetchNextPage: fetchNextPage,
+      //       builderDelegate: PagedChildBuilderDelegate<KekokukiAnchorModel>(
+      //         itemBuilder: (context, item, index) {
+      //           return GestureDetector(
+      //             onTap: () {
+      //               KekokukiCallGoingPage.show(anchorId: item.id, callType: KekokukiCallType.anchor);
+      //             },
+      //             child: KekokukiRoundImageWidget(
+      //               width: 184.pt,
+      //               height: 220.pt,
+      //               item.portrait,
+      //             ),
+      //           );
+      //         },
+      //       ),
+      //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      //         crossAxisCount: 2,
+      //         mainAxisSpacing: 3.pt,
+      //         crossAxisSpacing: 3.pt,
+      //         childAspectRatio: 184.pt / 220.pt,
+      //       ),
+      //     );
+      //   },
+      // ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            SizedBox(
+              height: kToolbarHeight,
+              width: Get.width,
+              child: KekokukiPrimaryTabbar(
+                tabs: controller.tabNameList.map((e) => Text(e)).toList(),
+                controller: controller.tabController,
+                labelPadding: EdgeInsetsDirectional.symmetric(horizontal: 12.pt),
+                unselectedLabelColor: KekokukiColors.primaryTextColor.withOpacity(0.5),
+                unselectedLabelStyle: KekokukiStyles.s16w700,
+                labelColor: KekokukiColors.primaryColor,
+                labelStyle: KekokukiStyles.s20w700,
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: controller.tabController,
+                children: [
+                  Container(),
+                  Container(),
+                ],
+              ),
+            ),
+          ],
         ),
-      ),
-      body: PagingListener(
-        controller: controller.pagingController,
-        builder: (context, state, fetchNextPage) {
-          return PagedGridView(
-            padding: EdgeInsets.symmetric(horizontal: 12.pt),
-            state: state,
-            fetchNextPage: fetchNextPage,
-            builderDelegate: PagedChildBuilderDelegate<KekokukiAnchorModel>(
-              itemBuilder: (context, item, index) {
-                return GestureDetector(
-                  onTap: () {
-                    KekokukiCallGoingPage.show(anchorId: item.id, callType: KekokukiCallType.anchor);
-                  },
-                  child: KekokukiRoundImageWidget(
-                    width: 184.pt,
-                    height: 220.pt,
-                    item.portrait,
-                  ),
-                );
-              },
-            ),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 3.pt,
-              crossAxisSpacing: 3.pt,
-              childAspectRatio: 184.pt / 220.pt,
-            ),
-          );
-        },
       ),
     );
   }

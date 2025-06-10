@@ -49,7 +49,7 @@ class KekokukiChatConversationPage extends GetView<KekokukiChatConversationPageC
                     return Divider(
                       height: 0.5,
                       indent: 75.pt,
-                      color: KekokukiColors.separatorLineColor,
+                      color: KekokukiColors.primaryColor,
                     );
                   },
                   itemCount: list.length,

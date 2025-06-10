@@ -67,7 +67,7 @@ class _KekokukiLanguageDialogState extends State<KekokukiLanguageDialog> {
                 height: 0.5,
                 indent: 0,
                 endIndent: 0,
-                color: KekokukiColors.separatorLineColor,
+                color: Colors.black12,
               );
             },
             itemCount: _dataList.length,

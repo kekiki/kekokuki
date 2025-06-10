@@ -12,8 +12,6 @@ import '../../common/utils/kekokuki_path_util.dart';
 import '../api/kekokuki_api_service.dart';
 import '../http_overrides/kekokuki_global_http_overrides.dart';
 import '../../pages/login/kekokuki_login_service.dart';
-import '../profile/kekokuki_profile_service.dart';
-import 'kekokuki_config_service.dart';
 
 class KekokukiAppConfig {
   /// 包类型，默认0
@@ -82,8 +80,6 @@ class KekokukiAppConfig {
     await Get.putAsync(() => KekokukiApiService().init());
     await Get.putAsync(() => KekokukiDatabaseService().init());
     await Get.putAsync(() => KekokukiLoginService().init());
-    await Get.putAsync(() => KekokukiConfigService().init());
-    await Get.putAsync(() => KekokukiProfileService().init());
 
     Get.lazyPut(() => KekokukiAnchorRepository(), fenix: true);
   }

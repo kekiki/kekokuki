@@ -30,7 +30,7 @@ class KekokukiChatConversationCell extends StatelessWidget {
       isDraggable: !conversation.isSystem,
       trailingActions: [
         SwipeAction(
-          color: KekokukiColors.accentColor,
+          color: Colors.red,
           widthSpace: 80.pt,
           onTap: (CompletionHandler handler) async {
             onTapDelete.call(conversation);
@@ -70,7 +70,7 @@ class KekokukiChatConversationCell extends StatelessWidget {
         height: 80.pt,
         padding: EdgeInsets.symmetric(horizontal: 15.pt, vertical: 10.pt),
         decoration: BoxDecoration(
-          color: conversation.isPined ? KekokukiColors.cardColor : Colors.white,
+          color: conversation.isPined ? Colors.black12 : Colors.white,
         ),
         child: _buildBody(),
       ),
@@ -135,7 +135,7 @@ class KekokukiChatConversationCell extends StatelessWidget {
                 alignment: Alignment.center,
                 padding: EdgeInsets.symmetric(horizontal: 4.5.pt),
                 decoration: BoxDecoration(
-                  color: KekokukiColors.accentColor,
+                  color: Colors.red,
                   borderRadius: BorderRadius.circular(8.pt),
                 ),
                 child: Text(

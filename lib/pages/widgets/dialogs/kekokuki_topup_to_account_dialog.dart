@@ -34,7 +34,7 @@ class KekokukiTopupToAccountDialog extends StatelessWidget {
             height: 102.pt,
             padding: EdgeInsets.symmetric(horizontal: 15.pt),
             decoration: BoxDecoration(
-              color: KekokukiColors.cardColor,
+              color: Colors.black12,
               borderRadius: BorderRadius.circular(8.pt),
             ),
             child: Row(
@@ -69,7 +69,7 @@ class KekokukiTopupToAccountDialog extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 26.pt,
                       fontWeight: FontWeight.w300,
-                      color: KekokukiColors.grayTextColor,
+                      color: Colors.black38,
                     ),
                   ),
                 ),
@@ -87,7 +87,7 @@ class KekokukiTopupToAccountDialog extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text(
                           'kekokuki_vip'.tr,
-                          style: KekokukiStyles.s22w700.copyWith(
+                          style: KekokukiStyles.s20w700.copyWith(
                             color: KekokukiColors.primaryColor,
                           ),
                         ),
@@ -111,7 +111,7 @@ class KekokukiTopupToAccountDialog extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 26.pt,
                       fontWeight: FontWeight.w300,
-                      color: KekokukiColors.grayTextColor,
+                      color: Colors.black38,
                     ),
                   ),
                 ),

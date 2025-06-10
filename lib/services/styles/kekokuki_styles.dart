@@ -24,6 +24,6 @@ abstract class KekokukiStyles {
   static final s16w700 = _textStyle.copyWith(fontWeight: FontWeight.w700, fontSize: 16.pt);
 
   static final s18w700 = _textStyle.copyWith(fontWeight: FontWeight.w700, fontSize: 18.pt);
-  static final s22w700 = _textStyle.copyWith(fontWeight: FontWeight.w700, fontSize: 22.pt);
-  static final s26w600 = _textStyle.copyWith(fontWeight: FontWeight.w600, fontSize: 26.pt);
+
+  static final s20w700 = _textStyle.copyWith(fontWeight: FontWeight.w700, fontSize: 18.pt);
 }

@@ -31,7 +31,7 @@ class KekokukiTestCallPage extends StatelessWidget {
               height: 46.pt,
               padding: EdgeInsets.symmetric(horizontal: 12.pt),
               decoration: BoxDecoration(
-                color: KekokukiColors.cardColor,
+                color: Colors.black12,
                 borderRadius: BorderRadius.circular(6.pt),
               ),
               child: TextField(
@@ -43,7 +43,7 @@ class KekokukiTestCallPage extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: anchorId,
                   hintStyle: KekokukiStyles.s14w400.copyWith(
-                    color: KekokukiColors.grayTextColor,
+                    color: Colors.black26,
                   ),
                   border: InputBorder.none,
                 ),

@@ -63,7 +63,7 @@ class KekokukiChatInputWidget extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 4.pt, horizontal: 14.pt),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(19.pt),
-                      color: KekokukiColors.cardColor,
+                      color: Colors.black12,
                       border: Border.all(color: rgba(242, 244, 246, 1)),
                     ),
                     child: TextField(
@@ -97,7 +97,7 @@ class KekokukiChatInputWidget extends StatelessWidget {
                     margin: EdgeInsetsDirectional.symmetric(horizontal: 12.pt),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(19.pt),
-                      color: enableSend ? KekokukiColors.buttonNormalColor : KekokukiColors.buttonDisableColor,
+                      color: enableSend ? KekokukiColors.primaryColor : Colors.black12,
                     ),
                     child: Text(
                       'kekokuki_send'.tr,

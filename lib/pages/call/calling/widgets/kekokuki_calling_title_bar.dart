@@ -48,7 +48,7 @@ class KekokukiCallingTitleBar extends StatelessWidget {
                       width: 6.pt,
                       height: 6.pt,
                       decoration: BoxDecoration(
-                        color: KekokukiColors.accentColor,
+                        color: Colors.red,
                         borderRadius: BorderRadius.circular(3.pt),
                       ),
                     ),

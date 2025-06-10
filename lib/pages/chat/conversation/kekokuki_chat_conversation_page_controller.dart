@@ -7,7 +7,7 @@ import 'kekokuki_chat_conversation_mixin.dart';
 import 'kekokuki_chat_conversation_model.dart';
 
 class KekokukiChatConversationPageController extends GetxController with KekokukiChatConversationMixin {
-  KekokukiChatService get _service => Get.find<KekokukiChatService>();
+  final _service = Get.find<KekokukiChatService>();
   final conversationListObs = RxList<KekokukiChatConversationModel>();
   late EasyRefreshController refreshController;
 

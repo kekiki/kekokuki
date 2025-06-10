@@ -7,6 +7,7 @@ import '../api/kekokuki_api_client.dart';
 import './../api/kekokuki_api_response_ext.dart';
 import '../preference/kekokuki_app_preference.dart';
 import 'kekokuki_config_model.dart';
+import 'kekokuki_global_state.dart';
 
 class KekokukiConfigService extends GetxService {
   static const _tag = 'ConfigService';
@@ -39,6 +40,7 @@ class KekokukiConfigService extends GetxService {
   }
 
   Future<void> _writeConfigModel(KekokukiConfigModel model) async {
+    KekokukiGlobalState.isTranslateEnable = model.translateEnable == '1';
     _configModel = model;
     KekokukiAppPreference.config.configModelJson = model.toJson();
   }

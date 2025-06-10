@@ -141,7 +141,7 @@ class KekokukiChatMessageCell extends StatelessWidget {
           constraints: BoxConstraints(minHeight: 32.pt),
           decoration: showBackground
               ? BoxDecoration(
-                  color: KekokukiColors.cardColor,
+                  color: Colors.black12,
                   borderRadius: BorderRadiusDirectional.only(
                     topStart: Radius.zero,
                     topEnd: Radius.circular(8.pt),

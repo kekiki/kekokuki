@@ -36,7 +36,7 @@ class KekokukiLoginAccountDialog extends StatelessWidget {
               height: 46.pt,
               padding: EdgeInsets.symmetric(horizontal: 12.pt),
               decoration: BoxDecoration(
-                color: KekokukiColors.cardColor,
+                color: Colors.black12,
                 borderRadius: BorderRadius.circular(6.pt),
               ),
               child: TextField(
@@ -49,7 +49,7 @@ class KekokukiLoginAccountDialog extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: 'UserId',
                   hintStyle: KekokukiStyles.s14w400.copyWith(
-                    color: KekokukiColors.grayTextColor,
+                    color: Colors.black45,
                   ),
                   border: InputBorder.none,
                 ),
@@ -64,7 +64,7 @@ class KekokukiLoginAccountDialog extends StatelessWidget {
               height: 46.pt,
               padding: EdgeInsets.symmetric(horizontal: 12.pt),
               decoration: BoxDecoration(
-                color: KekokukiColors.cardColor,
+                color: Colors.black12,
                 borderRadius: BorderRadius.circular(6.pt),
               ),
               child: TextField(
@@ -76,7 +76,7 @@ class KekokukiLoginAccountDialog extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: 'Password',
                   hintStyle: KekokukiStyles.s14w400.copyWith(
-                    color: KekokukiColors.grayTextColor,
+                    color: Colors.black45,
                   ),
                   border: InputBorder.none,
                 ),

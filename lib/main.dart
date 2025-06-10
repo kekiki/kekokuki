@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:kekokuki/services/styles/kekokuki_colors.dart';
 import 'dart:async';
 
 import 'common/behavior/kekokuki_over_scroll_behavior.dart';
@@ -53,7 +54,11 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'),
       defaultTransition: Transition.cupertino,
       theme: ThemeData(
+        fontFamily: 'Mulish',
         appBarTheme: const AppBarTheme(surfaceTintColor: Colors.transparent),
+        scaffoldBackgroundColor: Colors.white,
+        dialogBackgroundColor: Colors.white,
+        primaryColor: KekokukiColors.primaryColor,
       ),
       builder: KekokukiLoadingUtil.init(
         builder: (context, child) {
